@@ -1,0 +1,22 @@
+[workspace]
+authors = ["Rajeeva-IITM <bt20d204@smail.iitm.ac.in>"]
+channels = ["conda-forge"]
+name = "gLM-eval"
+platforms = ["linux-64"]
+version = "0.1.0"
+
+[tasks]
+
+[dependencies]
+python = "3.11.*"
+pytorch-gpu = ">=2.13.0,<3"
+transformers = ">=5.18.0,<6"
+datasets = ">=5.0.1,<6"
+scikit-learn = ">=1.9.1,<2"
+biopython = ">=1.88,<2"
+pandas = ">=3.0.6,<4"
+matplotlib = ">=3.11.2,<4"
+tqdm = ">=4.70.1,<5"
+
+[system-requirements]
+cuda = "12.0"

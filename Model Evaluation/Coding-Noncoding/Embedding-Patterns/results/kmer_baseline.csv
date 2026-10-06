@@ -1,0 +1,9 @@
+features,dims,test_accuracy
+1-mer counts,4,0.75824
+2-mer counts,16,0.81536
+3-mer counts,64,0.86972
+4-mer counts,256,0.88056
+5-mer counts,1024,0.89504
+6-mer counts,4096,0.89528
+GROVER embedding,768,0.90552
+GROVER residual after 1-6-mer regression,768,0.59216

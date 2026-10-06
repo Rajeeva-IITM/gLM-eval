@@ -1,0 +1,23 @@
+# Embedding Patterns: why coding and non-coding embeddings differ
+
+Three experiments with GROVER on Genomic Benchmarks `coding_vs_intergenomic_seqs` (200 bp). They ask what property of the DNA the frozen embeddings actually encode.
+
+| Script | Question |
+|---|---|
+| `kmer_baseline.py` | Do plain k-mer counts separate the classes as well as the embeddings? What is left after regressing the k-mer signal out of the embeddings? |
+| `perturb.py` | Which sequence edit (shuffles, codon shuffle, synonymous swap, in-frame vs out-of-frame stops, reverse complement) moves coding sequences over to non-coding? |
+| `codon_position.py` | In-silico mutagenesis: is GROVER less sensitive at codon position 3 (wobble) and to synonymous mutations? |
+
+`common.py` holds the shared helpers: data loading, GROVER embedding (cached to `results/grover_gb.npz`), the logistic-regression "coding score", and reading-frame detection.
+
+## Run
+From the repository root, `pixi install` once, then:
+```bash
+cd "Model Evaluation/Coding-Noncoding/Embedding-Patterns"
+pixi run python kmer_baseline.py   # builds the embedding cache on its first run
+pixi run python perturb.py
+pixi run python codon_position.py
+```
+Outputs (CSV and PNG files) are written to `results/`.
+
+Note: Genomic Benchmarks coding windows are not aligned to the reading frame. A frame is inferred only when exactly one forward frame has no stop codon. Sequences without a unique frame are dropped from `perturb.py` and `codon_position.py`.

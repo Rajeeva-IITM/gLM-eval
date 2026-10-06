@@ -1,1 +1,3 @@
 annotation_testing/
+# pixi environments
+.pixi
