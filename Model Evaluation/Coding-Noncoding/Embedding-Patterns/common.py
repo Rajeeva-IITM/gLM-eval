@@ -1,5 +1,10 @@
-"""Shared helpers: dataset, GROVER embeddings, coding direction, reading frame."""
+"""Shared helpers: dataset, gLM embeddings, coding direction, reading frame.
 
+Pick the model with the GLM_MODEL environment variable (default: GROVER), e.g.
+    GLM_MODEL=LongSafari/hyenadna-large-1m-seqlen-hf pixi run python kmer_baseline.py
+"""
+
+import os
 from pathlib import Path
 
 import numpy as np
@@ -10,11 +15,12 @@ from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import StandardScaler
 from transformers import AutoModel, AutoTokenizer
 
-MODEL_NAME = "PoetschLab/GROVER"
+MODEL_NAME = os.environ.get("GLM_MODEL", "PoetschLab/GROVER")
+MODEL_SHORT = MODEL_NAME.split("/")[-1]
 DATASET = "katarinagresova/Genomic_Benchmarks_demo_coding_vs_intergenomic_seqs"
-RESULTS = Path(__file__).parent / "results"
-RESULTS.mkdir(exist_ok=True)
-CACHE = RESULTS / "grover_gb.npz"
+RESULTS = Path(__file__).parent / "results" / MODEL_SHORT
+RESULTS.mkdir(parents=True, exist_ok=True)
+CACHE = RESULTS / "embeddings.npz"
 STOPS = {"TAA", "TAG", "TGA"}
 device = "cuda" if torch.cuda.is_available() else "cpu"
 
@@ -32,23 +38,31 @@ def load_gb():
     )
 
 
-def load_grover():
+def load_model():
     global _model, _tokenizer
     if _model is None:
-        _tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
-        _model = AutoModel.from_pretrained(MODEL_NAME).to(device).eval()
+        _tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME, trust_remote_code=True)
+        _model = AutoModel.from_pretrained(MODEL_NAME, trust_remote_code=True).to(device).eval()
     return _model, _tokenizer
 
 
 @torch.no_grad()
 def embed(seqs, batch_size=256):
-    """Last hidden layer, masked mean pooling (same as glm-classification-attribution.ipynb)."""
-    model, tokenizer = load_grover()
+    """Last hidden layer, masked mean pooling (same as glm-classification-attribution.ipynb).
+
+    HyenaDNA's tokenizer returns no attention mask, so all tokens are averaged.
+    That is fine here because every sequence is 200 bp (one token per base, no padding).
+    """
+    model, tokenizer = load_model()
     out = []
     for i in range(0, len(seqs), batch_size):
         inputs = tokenizer(list(seqs[i : i + batch_size]), return_tensors="pt", padding=True, truncation=True).to(device)
-        hidden = model(**inputs).last_hidden_state
-        mask = inputs["attention_mask"].unsqueeze(-1).float()
+        if "attention_mask" in inputs:
+            hidden = model(input_ids=inputs["input_ids"], attention_mask=inputs["attention_mask"]).last_hidden_state
+            mask = inputs["attention_mask"].unsqueeze(-1).float()
+        else:
+            hidden = model(input_ids=inputs["input_ids"]).last_hidden_state
+            mask = torch.ones_like(hidden[..., :1])
         out.append(((hidden * mask).sum(1) / mask.sum(1)).cpu().numpy())
     return np.vstack(out)
 
@@ -57,7 +71,7 @@ def get_embeddings():
     """Embeds train and test once; later calls read the cache."""
     train_seqs, y_train, test_seqs, y_test = load_gb()
     if not CACHE.exists():
-        print("Embedding train/test with GROVER (cached after first run)...")
+        print(f"Embedding train/test with {MODEL_SHORT} (cached after first run)...")
         np.savez(CACHE, X_train=embed(train_seqs), X_test=embed(test_seqs))
     data = np.load(CACHE)
     return data["X_train"], y_train, data["X_test"], y_test, train_seqs, test_seqs

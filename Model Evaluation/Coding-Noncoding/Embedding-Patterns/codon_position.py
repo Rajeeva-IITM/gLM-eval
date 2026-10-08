@@ -1,9 +1,9 @@
-"""Experiment C: does GROVER know about codons?
+"""Experiment C: does the gLM know about codons?
 
 In-silico mutagenesis: every position of a sequence is mutated to each of the 3 other bases.
 Effect of a mutation = change in coding score (logistic-regression probe on embeddings).
 We average effects by codon position (1/2/3) and by mutation class (synonymous/missense/nonsense).
-If GROVER has learned codon structure, coding sequences should show:
+If the model has learned codon structure, coding sequences should show:
   - smaller effects at codon position 3 (wobble), and
   - nonsense (new stop codon) mutations pushing the score towards non-coding.
 Non-coding sequences, read in frame 0, are the control and should show no such pattern.
@@ -16,7 +16,7 @@ import pandas as pd
 from Bio.Data.CodonTable import standard_dna_table
 from tqdm import tqdm
 
-from common import RESULTS, coding_direction, coding_score, embed, find_frame, get_embeddings
+from common import MODEL_SHORT, RESULTS, coding_direction, coding_score, embed, find_frame, get_embeddings
 
 N_SEQS = 300
 random.seed(0)
@@ -84,6 +84,6 @@ if __name__ == "__main__":
     by_class.pivot(index="mut_class", columns="group", values="mean_delta").reindex(classes).plot.bar(ax=ax2, rot=0)
     ax2.axhline(0, color="grey", lw=1)
     ax2.set(xlabel="Mutation class", ylabel="Mean Δ coding score (signed)", title="Direction of shift by mutation class")
-    fig.suptitle("GROVER in-silico mutagenesis")
+    fig.suptitle(f"{MODEL_SHORT} in-silico mutagenesis")
     fig.tight_layout()
     fig.savefig(RESULTS / "codon_position.png", dpi=200)

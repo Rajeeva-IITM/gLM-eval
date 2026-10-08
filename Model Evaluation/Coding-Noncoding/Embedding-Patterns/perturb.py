@@ -1,4 +1,4 @@
-"""Experiment B: which sequence edit makes GROVER stop seeing a coding sequence as coding?
+"""Experiment B: which sequence edit makes a gLM stop seeing a coding sequence as coding?
 
 Each edit keeps some property and destroys others. Every edit keeps the length at 200 bp.
 We re-embed the edited sequences and measure how far they move along the coding direction
@@ -12,7 +12,7 @@ import numpy as np
 import pandas as pd
 from Bio.Data.CodonTable import standard_dna_table
 
-from common import RESULTS, coding_direction, coding_score, embed, find_frame, get_embeddings
+from common import MODEL_SHORT, RESULTS, coding_direction, coding_score, embed, find_frame, get_embeddings
 
 N_SEQS = 2000
 random.seed(0)
@@ -114,6 +114,6 @@ if __name__ == "__main__":
     ax.set_ylim(0, 1)
     ax.axhline(0.5, color="grey", ls="--", lw=1)
     ax.legend()
-    ax.set_title("GROVER: effect of sequence edits on the coding/non-coding probe")
+    ax.set_title(f"{MODEL_SHORT}: effect of sequence edits on the coding/non-coding probe")
     fig.tight_layout()
     fig.savefig(RESULTS / "perturbation.png", dpi=200)

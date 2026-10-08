@@ -1,2 +1,2 @@
-results/*.npz
-results/*.log
+results/**/*.npz
+results/**/*.log
