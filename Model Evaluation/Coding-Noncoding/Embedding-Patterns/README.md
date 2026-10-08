@@ -1,6 +1,6 @@
 # Embedding Patterns: why coding and non-coding embeddings differ
 
-Three experiments on frozen gLM embeddings (GROVER and HyenaDNA so far) using Genomic Benchmarks `coding_vs_intergenomic_seqs` (200 bp). They ask what property of the DNA the frozen embeddings actually encode.
+Three experiments on frozen gLM embeddings (GROVER and seven HyenaDNA sizes) using Genomic Benchmarks `coding_vs_intergenomic_seqs` (200 bp). They ask what property of the DNA the frozen embeddings actually encode.
 
 | Script | Question |
 |---|---|
@@ -22,5 +22,7 @@ Outputs (CSV and PNG files) are written to `results/<model>/`. GROVER is the def
 ```bash
 GLM_MODEL=LongSafari/hyenadna-large-1m-seqlen-hf pixi run python kmer_baseline.py
 ```
+
+`pixi run python compare.py` collects every model's results into `results/summary.csv`.
 
 Note: Genomic Benchmarks coding windows are not aligned to the reading frame. A frame is inferred only when exactly one forward frame has no stop codon. Sequences without a unique frame are dropped from `perturb.py` and `codon_position.py`.

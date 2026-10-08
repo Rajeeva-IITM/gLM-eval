@@ -1,0 +1,7 @@
+group,codon_pos,mean_abs_delta,n
+coding,1,0.18478039,59400
+coding,2,0.18060598,59400
+coding,3,0.18381472,59400
+non-coding (frame 0),1,0.27002397,59400
+non-coding (frame 0),2,0.26893723,59400
+non-coding (frame 0),3,0.26956844,59400
