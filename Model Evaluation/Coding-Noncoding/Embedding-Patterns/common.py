@@ -2,9 +2,15 @@
 
 Pick the model with the GLM_MODEL environment variable (default: GROVER), e.g.
     GLM_MODEL=LongSafari/hyenadna-large-1m-seqlen-hf pixi run python kmer_baseline.py
+DNABERT-2 and Nucleotide Transformer v2 need the transformers 4.x environment:
+    GLM_MODEL=zhihan1996/DNABERT-2-117M pixi run -e legacy python kmer_baseline.py
+Evo and Evo 2 have their own environments and use their package model names:
+    GLM_MODEL=evo-1-8k-base pixi run -e evo python kmer_baseline.py
+    GLM_MODEL=evo2_7b pixi run -e evo2 python kmer_baseline.py
 """
 
 import os
+import sys
 from pathlib import Path
 
 import numpy as np
@@ -13,7 +19,6 @@ from datasets import load_dataset
 from sklearn.linear_model import LogisticRegression
 from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import StandardScaler
-from transformers import AutoModel, AutoTokenizer
 
 MODEL_NAME = os.environ.get("GLM_MODEL", "PoetschLab/GROVER")
 MODEL_SHORT = MODEL_NAME.split("/")[-1]
@@ -23,6 +28,10 @@ RESULTS.mkdir(parents=True, exist_ok=True)
 CACHE = RESULTS / "embeddings.npz"
 STOPS = {"TAA", "TAG", "TGA"}
 device = "cuda" if torch.cuda.is_available() else "cpu"
+IS_DNABERT2 = "DNABERT-2" in MODEL_NAME
+# NT v2 exposes its custom code only through the masked-LM class; hidden states come from output_hidden_states.
+IS_MLM = "nucleotide-transformer-v2" in MODEL_NAME
+IS_EVO = MODEL_NAME.startswith(("evo-", "evo2_"))
 
 _model, _tokenizer = None, None
 
@@ -40,10 +49,38 @@ def load_gb():
 
 def load_model():
     global _model, _tokenizer
+    if _model is None and IS_EVO:
+        if MODEL_NAME.startswith("evo2_"):
+            from evo2 import Evo2
+
+            wrapper = Evo2(MODEL_NAME)
+        else:
+            from evo import Evo
+
+            wrapper = Evo(MODEL_NAME, device=device)
+        _model, _tokenizer = wrapper.model.eval(), wrapper.tokenizer
     if _model is None:
+        # Imported here because the evo2 environment has no transformers.
+        from transformers import AutoModel, AutoModelForMaskedLM, AutoTokenizer, BertConfig
+
         _tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME, trust_remote_code=True)
-        _model = AutoModel.from_pretrained(MODEL_NAME, trust_remote_code=True).to(device).eval()
+        model_cls = AutoModelForMaskedLM if IS_MLM else AutoModel
+        # DNABERT-2 needs its config passed explicitly, or the remote config class clashes with BertConfig.
+        kwargs = {"config": BertConfig.from_pretrained(MODEL_NAME)} if IS_DNABERT2 else {}
+        _model = model_cls.from_pretrained(MODEL_NAME, trust_remote_code=True, **kwargs).to(device).eval()
+        if IS_DNABERT2:
+            # Its Triton attention kernel does not compile with current Triton; None selects the PyTorch path.
+            sys.modules[type(_model).__module__].flash_attn_qkvpacked_func = None
     return _model, _tokenizer
+
+
+def last_hidden(out):
+    """Last-layer token states from the different output types (tuple for DNABERT-2, masked-LM output for NT v2)."""
+    if isinstance(out, tuple):
+        return out[0]
+    if IS_MLM:
+        return out.hidden_states[-1]
+    return out.last_hidden_state
 
 
 @torch.no_grad()
@@ -53,17 +90,39 @@ def embed(seqs, batch_size=256):
     HyenaDNA's tokenizer returns no attention mask, so all tokens are averaged.
     That is fine here because every sequence is 200 bp (one token per base, no padding).
     """
+    if IS_EVO:
+        # Small batches: a 7B model leaves little room on a shared 24 GB A10 (Evo 2 needs more activation memory).
+        return embed_evo(seqs, min(batch_size, 8 if MODEL_NAME.startswith("evo2_") else 32))
     model, tokenizer = load_model()
     out = []
     for i in range(0, len(seqs), batch_size):
         inputs = tokenizer(list(seqs[i : i + batch_size]), return_tensors="pt", padding=True, truncation=True).to(device)
+        kwargs = {"output_hidden_states": True} if IS_MLM else {}
         if "attention_mask" in inputs:
-            hidden = model(input_ids=inputs["input_ids"], attention_mask=inputs["attention_mask"]).last_hidden_state
-            mask = inputs["attention_mask"].unsqueeze(-1).float()
-        else:
-            hidden = model(input_ids=inputs["input_ids"]).last_hidden_state
-            mask = torch.ones_like(hidden[..., :1])
+            kwargs["attention_mask"] = inputs["attention_mask"]
+        hidden = last_hidden(model(input_ids=inputs["input_ids"], **kwargs))
+        mask = inputs["attention_mask"].unsqueeze(-1).float() if "attention_mask" in inputs else torch.ones_like(hidden[..., :1])
         out.append(((hidden * mask).sum(1) / mask.sum(1)).cpu().numpy())
+    return np.vstack(out)
+
+
+@torch.no_grad()
+def embed_evo(seqs, batch_size):
+    """Evo/Evo 2: mean of the final-norm output (their last hidden layer), captured with a forward hook.
+
+    Character-level tokens, no special tokens; all sequences are 200 bp, so no padding is needed.
+    """
+    model, tokenizer = load_model()
+    captured = {}
+    handle = model.norm.register_forward_hook(lambda module, inputs, output: captured.update(hidden=output))
+    out = []
+    try:
+        for i in range(0, len(seqs), batch_size):
+            ids = torch.tensor([tokenizer.tokenize(s) for s in seqs[i : i + batch_size]], dtype=torch.long, device=device)
+            model(ids)
+            out.append(captured["hidden"].float().mean(1).cpu().numpy())
+    finally:
+        handle.remove()
     return np.vstack(out)
 
 

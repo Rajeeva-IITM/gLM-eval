@@ -9,14 +9,40 @@ version = "0.1.0"
 
 [dependencies]
 python = "3.11.*"
-pytorch-gpu = ">=2.13.0,<3"
-transformers = ">=5.18.0,<6"
 datasets = ">=5.0.1,<6"
 scikit-learn = ">=1.9.1,<2"
 biopython = ">=1.88,<2"
 pandas = ">=3.0.6,<4"
 matplotlib = ">=3.11.2,<4"
 tqdm = ">=4.70.1,<5"
+einops = "==0.8.1"
 
 [system-requirements]
 cuda = "12.0"
+
+[feature.conda-torch.dependencies]
+pytorch-gpu = ">=2.13.0,<3"
+
+[feature.current.dependencies]
+transformers = ">=5.18.0,<6"
+
+# Older gLMs (DNABERT-2, Nucleotide Transformer v2) ship custom model code that breaks on transformers 5.
+[feature.legacy.dependencies]
+transformers = ">=4.44,<4.47"
+
+# Evo and Evo 2 need PyPI torch 2.7 with a matching prebuilt flash-attn wheel.
+[feature.evo.pypi-dependencies]
+torch = "==2.7.1"
+flash-attn = { url = "https://github.com/Dao-AILab/flash-attention/releases/download/v2.7.4.post1/flash_attn-2.7.4.post1+cu12torch2.7cxx11abiTRUE-cp311-cp311-linux_x86_64.whl" }
+evo-model = ">=0.5"
+
+[feature.evo2.pypi-dependencies]
+torch = "==2.7.1"
+flash-attn = { url = "https://github.com/Dao-AILab/flash-attention/releases/download/v2.8.0.post2/flash_attn-2.8.0.post2+cu12torch2.7cxx11abiTRUE-cp311-cp311-linux_x86_64.whl" }
+evo2 = ">=0.6.0"
+
+[environments]
+default = ["conda-torch", "current"]
+legacy = ["conda-torch", "legacy"]
+evo = ["evo"]
+evo2 = ["evo2"]

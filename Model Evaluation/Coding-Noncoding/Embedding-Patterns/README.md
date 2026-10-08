@@ -1,6 +1,6 @@
 # Embedding Patterns: why coding and non-coding embeddings differ
 
-Three experiments on frozen gLM embeddings (GROVER and seven HyenaDNA sizes) using Genomic Benchmarks `coding_vs_intergenomic_seqs` (200 bp). They ask what property of the DNA the frozen embeddings actually encode.
+Three experiments on frozen gLM embeddings (GROVER, seven HyenaDNA sizes, DNABERT-2, four Nucleotide Transformer v2 sizes, Evo and Evo 2) using Genomic Benchmarks `coding_vs_intergenomic_seqs` (200 bp). They ask what property of the DNA the frozen embeddings actually encode.
 
 | Script | Question |
 |---|---|
@@ -22,6 +22,17 @@ Outputs (CSV and PNG files) are written to `results/<model>/`. GROVER is the def
 ```bash
 GLM_MODEL=LongSafari/hyenadna-large-1m-seqlen-hf pixi run python kmer_baseline.py
 ```
+
+Some models need their own pixi environment:
+
+| Models | Environment | `GLM_MODEL` example |
+|---|---|---|
+| GROVER, HyenaDNA | `default` | `LongSafari/hyenadna-large-1m-seqlen-hf` |
+| DNABERT-2, Nucleotide Transformer v2 | `legacy` (transformers 4.x) | `zhihan1996/DNABERT-2-117M` |
+| Evo | `evo` | `evo-1-8k-base` |
+| Evo 2 (7B only on non-Hopper GPUs) | `evo2` | `evo2_7b` |
+
+Example: `GLM_MODEL=evo2_7b pixi run -e evo2 python kmer_baseline.py`
 
 `pixi run python compare.py` collects every model's results into `results/summary.csv`.
 
