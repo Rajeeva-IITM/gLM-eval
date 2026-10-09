@@ -9,6 +9,11 @@ GROVER,cpg_obs_exp,0.07525377139884713
 GROVER,longest_homopolymer,-0.19812078730766505
 GROVER,tandem_repeat_score,-0.25680784318984656
 GROVER,trinucleotide_entropy,0.29116863211279925
+evo-1-8k-base,gc,0.6856686663585649
+evo-1-8k-base,cpg_obs_exp,0.17022253786439656
+evo-1-8k-base,longest_homopolymer,-0.24789449843817749
+evo-1-8k-base,tandem_repeat_score,-0.4101306611991611
+evo-1-8k-base,trinucleotide_entropy,0.41273065632091543
 hyenadna-large-1m-seqlen-hf,gc,0.4833927823126963
 hyenadna-large-1m-seqlen-hf,cpg_obs_exp,0.12484452674090696
 hyenadna-large-1m-seqlen-hf,longest_homopolymer,-0.35520171085640473
