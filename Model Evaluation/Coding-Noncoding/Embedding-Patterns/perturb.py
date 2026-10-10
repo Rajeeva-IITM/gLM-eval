@@ -1,6 +1,6 @@
 """Experiment B: which sequence edit makes a gLM stop seeing a coding sequence as coding?
 
-Each edit keeps some property and destroys others. Every edit keeps the length at 200 bp.
+Each edit keeps some property and destroys others. Every edit keeps the sequence length.
 We re-embed the edited sequences and measure how far they move along the coding direction
 (a logistic-regression probe trained on the original embeddings).
 """
@@ -12,7 +12,7 @@ import numpy as np
 import pandas as pd
 from Bio.Data.CodonTable import standard_dna_table
 
-from common import MODEL_SHORT, RESULTS, coding_direction, coding_score, embed, find_frame, get_embeddings
+from common import MODEL_SHORT, coding_direction, coding_score, embed, get_datasets
 
 N_SEQS = 2000
 random.seed(0)
@@ -55,10 +55,10 @@ def synonymous_swap(seq, frame):
 
 
 def insert_stops(seq, frame, offset):
-    """Overwrite 3 random codon slots with stop codons; offset 0 = in frame, offset 1 = same edit shifted out of frame."""
+    """Overwrite random codon slots with stop codons (3 per 200 bp); offset 0 = in frame, 1 = same edit out of frame."""
     s = list(seq)
     n = (len(seq) - frame - offset) // 3
-    for i in random.sample(range(n), 3):
+    for i in random.sample(range(n), min(n, max(3, round(3 * len(seq) / 200)))):
         start = frame + offset + 3 * i
         s[start : start + 3] = random.choice(["TAA", "TAG", "TGA"])
     return "".join(s)
@@ -74,27 +74,34 @@ EDITS = {
     "dinucleotide Markov\n(keeps 2-mers)": dinucleotide_markov,
     "codon shuffle\n(keeps codon usage)": codon_shuffle,
     "synonymous swap\n(keeps protein)": synonymous_swap,
-    "3 stops in frame": lambda s, f: insert_stops(s, f, 0),
-    "3 stops out of frame\n(control)": lambda s, f: insert_stops(s, f, 1),
+    "stops in frame": lambda s, f: insert_stops(s, f, 0),
+    "stops out of frame\n(control)": lambda s, f: insert_stops(s, f, 1),
     "reverse complement": reverse_complement,
 }
 
-if __name__ == "__main__":
-    X_train, y_train, X_test, y_test, _, test_seqs = get_embeddings()
-    clf = coding_direction(X_train, y_train)
-
-    coding = [(s, find_frame(s)) for s, y in zip(test_seqs, y_test) if y == 0]
-    resolved = [(s, f) for s, f in coding if f is not None]
-    print(f"Coding test seqs with exactly one open frame: {len(resolved)}/{len(coding)}")
+def run(ds, coding_cache):
+    """coding_cache: edit -> embeddings of the edited coding sequences, shared by datasets with the same coding set."""
+    random.seed(0)
+    clf = coding_direction(ds["X_train"], ds["y_train"])
+    test = list(zip(ds["test_seqs"], ds["test_frames"], ds["y_test"]))
+    resolved = [(s, f) for s, f, y in test if y == 0 and f is not None]
+    print(f"Coding test seqs with a known reading frame: {len(resolved)}/{sum(y == 0 for _, _, y in test)}")
+    noncoding = [(s, 0) for s, f, y in test if y == 1]
     groups = {
-        "coding": random.sample(resolved, N_SEQS),
-        "non-coding (frame 0)": [(s, 0) for s in random.sample([s for s, y in zip(test_seqs, y_test) if y == 1], N_SEQS)],
+        "coding": random.sample(resolved, min(N_SEQS, len(resolved))),
+        "non-coding (frame 0)": random.sample(noncoding, min(N_SEQS, len(noncoding))),
     }
 
     rows = []
     for group, seqs in groups.items():
         for edit, fn in EDITS.items():
-            score = coding_score(clf, embed([fn(s, f) for s, f in seqs]))
+            if group == "coding" and edit in coding_cache:
+                X = coding_cache[edit]
+            else:
+                X = embed([fn(s, f) for s, f in seqs])
+                if group == "coding":
+                    coding_cache[edit] = X
+            score = coding_score(clf, X)
             rows.append({
                 "group": group,
                 "edit": edit.replace("\n", " "),
@@ -103,7 +110,7 @@ if __name__ == "__main__":
             })
             print(rows[-1])
     df = pd.DataFrame(rows)
-    df.to_csv(RESULTS / "perturbation.csv", index=False)
+    df.to_csv(ds["out_dir"] / "perturbation.csv", index=False)
 
     fig, ax = plt.subplots(figsize=(12, 5))
     x = np.arange(len(EDITS))
@@ -114,6 +121,13 @@ if __name__ == "__main__":
     ax.set_ylim(0, 1)
     ax.axhline(0.5, color="grey", ls="--", lw=1)
     ax.legend()
-    ax.set_title(f"{MODEL_SHORT}: effect of sequence edits on the coding/non-coding probe")
+    ax.set_title(f"{MODEL_SHORT} ({ds['name']}): effect of sequence edits on the coding/non-coding probe")
     fig.tight_layout()
-    fig.savefig(RESULTS / "perturbation.png", dpi=200)
+    fig.savefig(ds["out_dir"] / "perturbation.png", dpi=200)
+
+
+if __name__ == "__main__":
+    coding_cache = {}
+    for ds in get_datasets():
+        print(f"=== {ds['name']}")
+        run(ds, coding_cache)

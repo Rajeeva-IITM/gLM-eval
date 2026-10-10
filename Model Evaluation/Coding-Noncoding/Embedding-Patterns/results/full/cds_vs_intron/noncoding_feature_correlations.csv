@@ -1,0 +1,183 @@
+model,feature,spearman_vs_coding_score
+DNABERT-2-117M,Alu,-0.46005898949390156
+DNABERT-2-117M,L1,-0.1860456268020907
+DNABERT-2-117M,MIR,-0.05316184707088894
+DNABERT-2-117M,L2,-0.057043350304476347
+DNABERT-2-117M,LTR,0.01184070362864541
+DNABERT-2-117M,DNA transposon,-0.05220805667410863
+DNABERT-2-117M,simple repeat,-0.07190211028878979
+DNABERT-2-117M,low complexity,-0.05646976576134261
+DNABERT-2-117M,other repeat,0.03188744518593361
+DNABERT-2-117M,gc,0.20177687802104796
+DNABERT-2-117M,cpg_obs_exp,-0.03951655633957857
+DNABERT-2-117M,longest_homopolymer,-0.3297526576940454
+DNABERT-2-117M,tandem_repeat_score,-0.23189470729440198
+DNABERT-2-117M,trinucleotide_entropy,0.01807509755307695
+GROVER,Alu,-0.42791819955841454
+GROVER,L1,-0.19158813758492232
+GROVER,MIR,-0.11916828955498474
+GROVER,L2,-0.06745816975563257
+GROVER,LTR,0.021340581979509873
+GROVER,DNA transposon,0.03785292142284439
+GROVER,simple repeat,-0.06440019379697497
+GROVER,low complexity,-0.05070499225208335
+GROVER,other repeat,0.07152647349582912
+GROVER,gc,0.22448200878741567
+GROVER,cpg_obs_exp,-0.016486813844912553
+GROVER,longest_homopolymer,-0.2997068771461686
+GROVER,tandem_repeat_score,-0.23882283513016267
+GROVER,trinucleotide_entropy,0.03926674827856106
+hyenadna-large-1m-seqlen-hf,Alu,-0.7870926176675178
+hyenadna-large-1m-seqlen-hf,L1,-0.20633877594108938
+hyenadna-large-1m-seqlen-hf,MIR,0.018960073738520728
+hyenadna-large-1m-seqlen-hf,L2,-0.015617735479047642
+hyenadna-large-1m-seqlen-hf,LTR,-0.06541316604685044
+hyenadna-large-1m-seqlen-hf,DNA transposon,-0.06867668701247613
+hyenadna-large-1m-seqlen-hf,simple repeat,-0.1611629323347219
+hyenadna-large-1m-seqlen-hf,low complexity,-0.08548889427499172
+hyenadna-large-1m-seqlen-hf,other repeat,-0.006146740732693132
+hyenadna-large-1m-seqlen-hf,gc,0.18389803883674996
+hyenadna-large-1m-seqlen-hf,cpg_obs_exp,-0.13970129209040696
+hyenadna-large-1m-seqlen-hf,longest_homopolymer,-0.6024603866712293
+hyenadna-large-1m-seqlen-hf,tandem_repeat_score,-0.16305413590273052
+hyenadna-large-1m-seqlen-hf,trinucleotide_entropy,-0.1732194240591496
+hyenadna-medium-160k-seqlen-hf,Alu,-0.6937373272457072
+hyenadna-medium-160k-seqlen-hf,L1,-0.27397778118573823
+hyenadna-medium-160k-seqlen-hf,MIR,-0.012066383286756674
+hyenadna-medium-160k-seqlen-hf,L2,-0.02034247495047589
+hyenadna-medium-160k-seqlen-hf,LTR,-0.1117368177847938
+hyenadna-medium-160k-seqlen-hf,DNA transposon,-0.08575552013138603
+hyenadna-medium-160k-seqlen-hf,simple repeat,-0.19171126041805325
+hyenadna-medium-160k-seqlen-hf,low complexity,-0.09353456877325245
+hyenadna-medium-160k-seqlen-hf,other repeat,-0.01147554946867726
+hyenadna-medium-160k-seqlen-hf,gc,0.20606727549542792
+hyenadna-medium-160k-seqlen-hf,cpg_obs_exp,-0.07883347748556013
+hyenadna-medium-160k-seqlen-hf,longest_homopolymer,-0.5509021540942515
+hyenadna-medium-160k-seqlen-hf,tandem_repeat_score,-0.19204441765495545
+hyenadna-medium-160k-seqlen-hf,trinucleotide_entropy,-0.12106545630073139
+hyenadna-medium-450k-seqlen-hf,Alu,-0.605965943246677
+hyenadna-medium-450k-seqlen-hf,L1,-0.19363667621161
+hyenadna-medium-450k-seqlen-hf,MIR,-0.004403602973021951
+hyenadna-medium-450k-seqlen-hf,L2,0.00856980701084592
+hyenadna-medium-450k-seqlen-hf,LTR,-0.020748333129802062
+hyenadna-medium-450k-seqlen-hf,DNA transposon,-0.049579022930112945
+hyenadna-medium-450k-seqlen-hf,simple repeat,-0.1385244504360293
+hyenadna-medium-450k-seqlen-hf,low complexity,-0.079816052891758
+hyenadna-medium-450k-seqlen-hf,other repeat,0.02210481617407315
+hyenadna-medium-450k-seqlen-hf,gc,0.16167535853208173
+hyenadna-medium-450k-seqlen-hf,cpg_obs_exp,-0.08585391686378349
+hyenadna-medium-450k-seqlen-hf,longest_homopolymer,-0.46161697516565414
+hyenadna-medium-450k-seqlen-hf,tandem_repeat_score,-0.2531123873666013
+hyenadna-medium-450k-seqlen-hf,trinucleotide_entropy,-0.05039175926041909
+hyenadna-small-32k-seqlen-hf,Alu,-0.5970376571067881
+hyenadna-small-32k-seqlen-hf,L1,-0.26668854544255416
+hyenadna-small-32k-seqlen-hf,MIR,-0.17546638914266324
+hyenadna-small-32k-seqlen-hf,L2,-0.10644407875768366
+hyenadna-small-32k-seqlen-hf,LTR,-0.09600778526102025
+hyenadna-small-32k-seqlen-hf,DNA transposon,-0.11357941870592726
+hyenadna-small-32k-seqlen-hf,simple repeat,-0.09562403071385409
+hyenadna-small-32k-seqlen-hf,low complexity,-0.05311923910454067
+hyenadna-small-32k-seqlen-hf,other repeat,-0.011171175591092132
+hyenadna-small-32k-seqlen-hf,gc,0.199923053843554
+hyenadna-small-32k-seqlen-hf,cpg_obs_exp,-0.03168580282612011
+hyenadna-small-32k-seqlen-hf,longest_homopolymer,-0.4790591537562832
+hyenadna-small-32k-seqlen-hf,tandem_repeat_score,-0.10854508085521435
+hyenadna-small-32k-seqlen-hf,trinucleotide_entropy,-0.11907608223926879
+hyenadna-tiny-16k-seqlen-d128-hf,Alu,-0.7684968233234208
+hyenadna-tiny-16k-seqlen-d128-hf,L1,-0.22397579897569272
+hyenadna-tiny-16k-seqlen-d128-hf,MIR,0.05470240271407318
+hyenadna-tiny-16k-seqlen-d128-hf,L2,-0.018422859993823117
+hyenadna-tiny-16k-seqlen-d128-hf,LTR,-0.030323167911134583
+hyenadna-tiny-16k-seqlen-d128-hf,DNA transposon,-0.061282141385020986
+hyenadna-tiny-16k-seqlen-d128-hf,simple repeat,-0.14763116721278155
+hyenadna-tiny-16k-seqlen-d128-hf,low complexity,-0.0714348301848105
+hyenadna-tiny-16k-seqlen-d128-hf,other repeat,-0.03133577208276688
+hyenadna-tiny-16k-seqlen-d128-hf,gc,0.24601238056452268
+hyenadna-tiny-16k-seqlen-d128-hf,cpg_obs_exp,-0.136603301981402
+hyenadna-tiny-16k-seqlen-d128-hf,longest_homopolymer,-0.5948898760855776
+hyenadna-tiny-16k-seqlen-d128-hf,tandem_repeat_score,-0.2170943027543123
+hyenadna-tiny-16k-seqlen-d128-hf,trinucleotide_entropy,-0.12121604450858377
+hyenadna-tiny-1k-seqlen-d256-hf,Alu,-0.6184657855743523
+hyenadna-tiny-1k-seqlen-d256-hf,L1,-0.14735431905605514
+hyenadna-tiny-1k-seqlen-d256-hf,MIR,0.07701965152876508
+hyenadna-tiny-1k-seqlen-d256-hf,L2,0.04183811891211166
+hyenadna-tiny-1k-seqlen-d256-hf,LTR,0.009549243367075399
+hyenadna-tiny-1k-seqlen-d256-hf,DNA transposon,-0.0031863484208736097
+hyenadna-tiny-1k-seqlen-d256-hf,simple repeat,-0.11700956840657739
+hyenadna-tiny-1k-seqlen-d256-hf,low complexity,-0.07100608308925414
+hyenadna-tiny-1k-seqlen-d256-hf,other repeat,0.01987376783403657
+hyenadna-tiny-1k-seqlen-d256-hf,gc,0.25700177265352697
+hyenadna-tiny-1k-seqlen-d256-hf,cpg_obs_exp,-0.05023186804807222
+hyenadna-tiny-1k-seqlen-d256-hf,longest_homopolymer,-0.45946037790134614
+hyenadna-tiny-1k-seqlen-d256-hf,tandem_repeat_score,-0.3215854133206333
+hyenadna-tiny-1k-seqlen-d256-hf,trinucleotide_entropy,0.036736837554662116
+hyenadna-tiny-1k-seqlen-hf,Alu,-0.7052463465735732
+hyenadna-tiny-1k-seqlen-hf,L1,-0.1902984444930474
+hyenadna-tiny-1k-seqlen-hf,MIR,0.08181828163401714
+hyenadna-tiny-1k-seqlen-hf,L2,0.02319285112123532
+hyenadna-tiny-1k-seqlen-hf,LTR,0.0026175362078163173
+hyenadna-tiny-1k-seqlen-hf,DNA transposon,-0.03280052834547453
+hyenadna-tiny-1k-seqlen-hf,simple repeat,-0.13800746737892214
+hyenadna-tiny-1k-seqlen-hf,low complexity,-0.06308133585070173
+hyenadna-tiny-1k-seqlen-hf,other repeat,-0.0055605425638379025
+hyenadna-tiny-1k-seqlen-hf,gc,0.2525946951304547
+hyenadna-tiny-1k-seqlen-hf,cpg_obs_exp,-0.08964414701350128
+hyenadna-tiny-1k-seqlen-hf,longest_homopolymer,-0.5315721906144608
+hyenadna-tiny-1k-seqlen-hf,tandem_repeat_score,-0.2618192417755347
+hyenadna-tiny-1k-seqlen-hf,trinucleotide_entropy,-0.025993739674842573
+nucleotide-transformer-v2-100m-multi-species,Alu,-0.4428760406422586
+nucleotide-transformer-v2-100m-multi-species,L1,-0.33235071368987396
+nucleotide-transformer-v2-100m-multi-species,MIR,-0.23306597482720973
+nucleotide-transformer-v2-100m-multi-species,L2,-0.27388480077015387
+nucleotide-transformer-v2-100m-multi-species,LTR,-0.20220278167547567
+nucleotide-transformer-v2-100m-multi-species,DNA transposon,-0.20765582893401252
+nucleotide-transformer-v2-100m-multi-species,simple repeat,-0.1920860846002948
+nucleotide-transformer-v2-100m-multi-species,low complexity,-0.09025187791340816
+nucleotide-transformer-v2-100m-multi-species,other repeat,-0.11144732609981729
+nucleotide-transformer-v2-100m-multi-species,gc,0.156255378855066
+nucleotide-transformer-v2-100m-multi-species,cpg_obs_exp,0.04610662936760067
+nucleotide-transformer-v2-100m-multi-species,longest_homopolymer,-0.48030755816288473
+nucleotide-transformer-v2-100m-multi-species,tandem_repeat_score,0.10088658211504116
+nucleotide-transformer-v2-100m-multi-species,trinucleotide_entropy,-0.25422939065804306
+nucleotide-transformer-v2-250m-multi-species,Alu,-0.545170858177473
+nucleotide-transformer-v2-250m-multi-species,L1,-0.3364257408576262
+nucleotide-transformer-v2-250m-multi-species,MIR,-0.2158223056870611
+nucleotide-transformer-v2-250m-multi-species,L2,-0.225540422991607
+nucleotide-transformer-v2-250m-multi-species,LTR,-0.21129990153259212
+nucleotide-transformer-v2-250m-multi-species,DNA transposon,-0.2342760198978926
+nucleotide-transformer-v2-250m-multi-species,simple repeat,-0.1913878922944412
+nucleotide-transformer-v2-250m-multi-species,low complexity,-0.11313720905066955
+nucleotide-transformer-v2-250m-multi-species,other repeat,-0.10892836108540405
+nucleotide-transformer-v2-250m-multi-species,gc,0.2419294484689141
+nucleotide-transformer-v2-250m-multi-species,cpg_obs_exp,0.0006465271083293216
+nucleotide-transformer-v2-250m-multi-species,longest_homopolymer,-0.5695533902753908
+nucleotide-transformer-v2-250m-multi-species,tandem_repeat_score,0.06434293175242177
+nucleotide-transformer-v2-250m-multi-species,trinucleotide_entropy,-0.3132256012294248
+nucleotide-transformer-v2-500m-multi-species,Alu,-0.41982901333479594
+nucleotide-transformer-v2-500m-multi-species,L1,-0.2932190872756489
+nucleotide-transformer-v2-500m-multi-species,MIR,-0.2865562996182601
+nucleotide-transformer-v2-500m-multi-species,L2,-0.25367091160715755
+nucleotide-transformer-v2-500m-multi-species,LTR,-0.20383021784419855
+nucleotide-transformer-v2-500m-multi-species,DNA transposon,-0.24048471669258328
+nucleotide-transformer-v2-500m-multi-species,simple repeat,-0.2162174410790144
+nucleotide-transformer-v2-500m-multi-species,low complexity,-0.12627505007266795
+nucleotide-transformer-v2-500m-multi-species,other repeat,-0.09087426183000444
+nucleotide-transformer-v2-500m-multi-species,gc,0.1814971024751831
+nucleotide-transformer-v2-500m-multi-species,cpg_obs_exp,0.07354473061515307
+nucleotide-transformer-v2-500m-multi-species,longest_homopolymer,-0.4754352048996855
+nucleotide-transformer-v2-500m-multi-species,tandem_repeat_score,0.0656188006722207
+nucleotide-transformer-v2-500m-multi-species,trinucleotide_entropy,-0.24933671956263082
+nucleotide-transformer-v2-50m-multi-species,Alu,-0.3932348373503143
+nucleotide-transformer-v2-50m-multi-species,L1,-0.31406621899921244
+nucleotide-transformer-v2-50m-multi-species,MIR,-0.1057179896840568
+nucleotide-transformer-v2-50m-multi-species,L2,-0.18451984859147405
+nucleotide-transformer-v2-50m-multi-species,LTR,-0.1725095388888537
+nucleotide-transformer-v2-50m-multi-species,DNA transposon,-0.20571851705468217
+nucleotide-transformer-v2-50m-multi-species,simple repeat,-0.13398748743166922
+nucleotide-transformer-v2-50m-multi-species,low complexity,-0.0916113139771892
+nucleotide-transformer-v2-50m-multi-species,other repeat,-0.12208546975876138
+nucleotide-transformer-v2-50m-multi-species,gc,0.44383162174345087
+nucleotide-transformer-v2-50m-multi-species,cpg_obs_exp,0.10933875109056225
+nucleotide-transformer-v2-50m-multi-species,longest_homopolymer,-0.48423421154801566
+nucleotide-transformer-v2-50m-multi-species,tandem_repeat_score,0.0008218890909719098
+nucleotide-transformer-v2-50m-multi-species,trinucleotide_entropy,-0.14964578284435465

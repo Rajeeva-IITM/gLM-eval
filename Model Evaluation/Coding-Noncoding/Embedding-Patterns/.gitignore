@@ -1,3 +1,5 @@
 results/**/*.npz
 results/**/*.log
 activations_debug.log
+data/full/
+results/full/embeddings/

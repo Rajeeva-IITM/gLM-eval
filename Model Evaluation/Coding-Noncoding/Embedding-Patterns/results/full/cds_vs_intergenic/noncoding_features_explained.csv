@@ -1,0 +1,14 @@
+model,r2_features_to_coding_score
+DNABERT-2-117M,0.5555812560670177
+GROVER,0.5043649203103602
+hyenadna-large-1m-seqlen-hf,0.40204805396945753
+hyenadna-medium-160k-seqlen-hf,0.5006296531807282
+hyenadna-medium-450k-seqlen-hf,0.45992681082075315
+hyenadna-small-32k-seqlen-hf,0.5400654114308395
+hyenadna-tiny-16k-seqlen-d128-hf,0.45047939479489474
+hyenadna-tiny-1k-seqlen-d256-hf,0.35817245051122704
+hyenadna-tiny-1k-seqlen-hf,0.43997164138351347
+nucleotide-transformer-v2-100m-multi-species,0.3700544430330874
+nucleotide-transformer-v2-250m-multi-species,0.3745110780575948
+nucleotide-transformer-v2-500m-multi-species,0.35345323466022166
+nucleotide-transformer-v2-50m-multi-species,0.37551599739741387

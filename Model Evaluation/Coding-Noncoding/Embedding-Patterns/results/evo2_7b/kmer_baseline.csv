@@ -1,0 +1,9 @@
+features,dims,test_accuracy
+1-mer counts,4,0.75824
+2-mer counts,16,0.81536
+3-mer counts,64,0.8698
+4-mer counts,256,0.88064
+5-mer counts,1024,0.8952
+6-mer counts,4096,0.89588
+evo2_7b embedding,4096,0.93136
+evo2_7b residual after 1-6-mer regression,4096,0.62656
