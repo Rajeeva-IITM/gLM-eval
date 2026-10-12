@@ -1,0 +1,14 @@
+model,embedding,residual,dims
+GROVER,0.953,0.605,768
+DNABERT-2,0.968,0.656,768
+NT-v2 50M,0.993,0.651,512
+NT-v2 100M,0.991,0.662,512
+NT-v2 250M,0.993,0.657,768
+NT-v2 500M,0.991,0.644,1024
+Hyena tiny-1k d128,0.927,0.560,128
+Hyena tiny-1k d256,0.937,0.558,256
+Hyena tiny-16k,0.922,0.572,128
+Hyena small-32k,0.956,0.593,256
+Hyena medium-160k,0.949,0.618,256
+Hyena medium-450k,0.942,0.621,256
+Hyena large-1m,0.946,0.620,256
