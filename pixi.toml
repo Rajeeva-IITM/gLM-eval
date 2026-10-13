@@ -41,8 +41,18 @@ torch = "==2.7.1"
 flash-attn = { url = "https://github.com/Dao-AILab/flash-attention/releases/download/v2.8.0.post2/flash_attn-2.8.0.post2+cu12torch2.7cxx11abiTRUE-cp311-cp311-linux_x86_64.whl" }
 evo2 = ">=0.6.0"
 
+# Caduceus needs mamba-ssm and causal-conv1d; prebuilt wheels exist for PyPI torch 2.7. Its model code targets transformers 4.x.
+[feature.caduceus.dependencies]
+transformers = ">=4.44,<4.47"
+
+[feature.caduceus.pypi-dependencies]
+torch = "==2.7.1"
+causal-conv1d = { url = "https://github.com/Dao-AILab/causal-conv1d/releases/download/v1.5.2/causal_conv1d-1.5.2+cu12torch2.7cxx11abiTRUE-cp311-cp311-linux_x86_64.whl" }
+mamba-ssm = { url = "https://github.com/state-spaces/mamba/releases/download/v2.2.5/mamba_ssm-2.2.5+cu12torch2.7cxx11abiTRUE-cp311-cp311-linux_x86_64.whl" }
+
 [environments]
 default = ["conda-torch", "current"]
 legacy = ["conda-torch", "legacy"]
 evo = ["evo"]
 evo2 = ["evo2"]
+caduceus = ["caduceus"]

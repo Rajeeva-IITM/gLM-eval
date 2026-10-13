@@ -41,10 +41,12 @@ IS_EVO = MODEL_NAME.startswith(("evo-", "evo2_"))
 # Longest chunk (bp) each model embeds in one pass; longer sequences are split into near-equal chunks and averaged.
 # GROVER/DNABERT-2: 1.5 kb stays under 512 BPE tokens even for low-compressing sequence (2 kb can reach ~550).
 # Evo windows are limited by memory on a shared 24 GB GPU, not context (Evo 1 at 8 kb peaks at ~16 GB).
-WINDOWS = {"GROVER": 1500, "DNABERT-2": 1500, "hyenadna-tiny-1k": 1000, "evo-1": 4000, "evo2_": 2000}
+# "seqlen-1k" = the Caduceus models trained on 1 kb.
+WINDOWS = {"GROVER": 1500, "DNABERT-2": 1500, "hyenadna-tiny-1k": 1000, "seqlen-1k": 1000, "evo-1": 4000, "evo2_": 2000}
 WINDOW = next((w for key, w in WINDOWS.items() if key in MODEL_NAME), 10_000)
 
-NO_MASK = IS_EVO or "hyenadna" in MODEL_NAME
+# Caduceus (bidirectional Mamba) also takes no attention mask, and padding would leak into its reverse pass.
+NO_MASK = IS_EVO or "hyenadna" in MODEL_NAME or "caduceus" in MODEL_NAME
 _model, _tokenizer = None, None
 
 
@@ -146,7 +148,7 @@ def embed_chunks(seqs, batch_size):
     for batch in batches(seqs, batch_size):
         inputs = tokenizer(list(batch), return_tensors="pt", padding=True, truncation=True).to(device)
         kwargs = {"output_hidden_states": True} if IS_MLM else {}
-        if "attention_mask" in inputs:
+        if "attention_mask" in inputs and not NO_MASK:
             kwargs["attention_mask"] = inputs["attention_mask"]
         hidden = last_hidden(model(input_ids=inputs["input_ids"], **kwargs))
         mask = inputs["attention_mask"].unsqueeze(-1).float() if "attention_mask" in inputs else torch.ones_like(hidden[..., :1])

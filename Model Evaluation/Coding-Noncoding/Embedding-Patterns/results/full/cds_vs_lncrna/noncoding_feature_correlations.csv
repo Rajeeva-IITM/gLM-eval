@@ -27,6 +27,90 @@ GROVER,cpg_obs_exp,0.06840088162211459
 GROVER,longest_homopolymer,-0.2742425582201484
 GROVER,tandem_repeat_score,-0.14568900180951164
 GROVER,trinucleotide_entropy,-0.016683020018910186
+caduceus-ph_seqlen-131k_d_model-256_n_layer-16,Alu,-0.41201945914764704
+caduceus-ph_seqlen-131k_d_model-256_n_layer-16,L1,-0.36678973177529345
+caduceus-ph_seqlen-131k_d_model-256_n_layer-16,MIR,-0.21742980341907545
+caduceus-ph_seqlen-131k_d_model-256_n_layer-16,L2,-0.20835187707451008
+caduceus-ph_seqlen-131k_d_model-256_n_layer-16,LTR,-0.2898969685638686
+caduceus-ph_seqlen-131k_d_model-256_n_layer-16,DNA transposon,-0.1475809154309891
+caduceus-ph_seqlen-131k_d_model-256_n_layer-16,simple repeat,-0.06285949300653014
+caduceus-ph_seqlen-131k_d_model-256_n_layer-16,low complexity,0.0034141441058788994
+caduceus-ph_seqlen-131k_d_model-256_n_layer-16,other repeat,-0.024800938892523862
+caduceus-ph_seqlen-131k_d_model-256_n_layer-16,gc,0.13577200148603594
+caduceus-ph_seqlen-131k_d_model-256_n_layer-16,cpg_obs_exp,0.058846148531130134
+caduceus-ph_seqlen-131k_d_model-256_n_layer-16,longest_homopolymer,-0.3094512830875248
+caduceus-ph_seqlen-131k_d_model-256_n_layer-16,tandem_repeat_score,-0.019952718746132452
+caduceus-ph_seqlen-131k_d_model-256_n_layer-16,trinucleotide_entropy,-0.1529658144759165
+caduceus-ph_seqlen-1k_d_model-118_n_layer-4_lr-8e-3,Alu,-0.5222500674660088
+caduceus-ph_seqlen-1k_d_model-118_n_layer-4_lr-8e-3,L1,-0.2075540003354179
+caduceus-ph_seqlen-1k_d_model-118_n_layer-4_lr-8e-3,MIR,-0.10247250040880142
+caduceus-ph_seqlen-1k_d_model-118_n_layer-4_lr-8e-3,L2,-0.05668107123283103
+caduceus-ph_seqlen-1k_d_model-118_n_layer-4_lr-8e-3,LTR,-0.1224278336383092
+caduceus-ph_seqlen-1k_d_model-118_n_layer-4_lr-8e-3,DNA transposon,-0.00950328016680755
+caduceus-ph_seqlen-1k_d_model-118_n_layer-4_lr-8e-3,simple repeat,-0.14604472675849847
+caduceus-ph_seqlen-1k_d_model-118_n_layer-4_lr-8e-3,low complexity,-0.022097842037279505
+caduceus-ph_seqlen-1k_d_model-118_n_layer-4_lr-8e-3,other repeat,0.0016054078120987887
+caduceus-ph_seqlen-1k_d_model-118_n_layer-4_lr-8e-3,gc,0.17739762442836976
+caduceus-ph_seqlen-1k_d_model-118_n_layer-4_lr-8e-3,cpg_obs_exp,0.07528789635051224
+caduceus-ph_seqlen-1k_d_model-118_n_layer-4_lr-8e-3,longest_homopolymer,-0.3103624585667431
+caduceus-ph_seqlen-1k_d_model-118_n_layer-4_lr-8e-3,tandem_repeat_score,-0.2009223459061625
+caduceus-ph_seqlen-1k_d_model-118_n_layer-4_lr-8e-3,trinucleotide_entropy,-0.006714607094936446
+caduceus-ph_seqlen-1k_d_model-256_n_layer-4_lr-8e-3,Alu,-0.4814214141720025
+caduceus-ph_seqlen-1k_d_model-256_n_layer-4_lr-8e-3,L1,-0.2794841529923493
+caduceus-ph_seqlen-1k_d_model-256_n_layer-4_lr-8e-3,MIR,-0.18239913331002597
+caduceus-ph_seqlen-1k_d_model-256_n_layer-4_lr-8e-3,L2,-0.07940617094701692
+caduceus-ph_seqlen-1k_d_model-256_n_layer-4_lr-8e-3,LTR,-0.14482955231688954
+caduceus-ph_seqlen-1k_d_model-256_n_layer-4_lr-8e-3,DNA transposon,-0.014938123251835191
+caduceus-ph_seqlen-1k_d_model-256_n_layer-4_lr-8e-3,simple repeat,-0.10926769365796471
+caduceus-ph_seqlen-1k_d_model-256_n_layer-4_lr-8e-3,low complexity,-0.009606748279686052
+caduceus-ph_seqlen-1k_d_model-256_n_layer-4_lr-8e-3,other repeat,-0.0027073136691687784
+caduceus-ph_seqlen-1k_d_model-256_n_layer-4_lr-8e-3,gc,0.18001418411475512
+caduceus-ph_seqlen-1k_d_model-256_n_layer-4_lr-8e-3,cpg_obs_exp,0.031998134047969765
+caduceus-ph_seqlen-1k_d_model-256_n_layer-4_lr-8e-3,longest_homopolymer,-0.32838300243278457
+caduceus-ph_seqlen-1k_d_model-256_n_layer-4_lr-8e-3,tandem_repeat_score,-0.18771780671352425
+caduceus-ph_seqlen-1k_d_model-256_n_layer-4_lr-8e-3,trinucleotide_entropy,-0.024940630880949714
+caduceus-ps_seqlen-131k_d_model-256_n_layer-16,Alu,-0.3609150006643991
+caduceus-ps_seqlen-131k_d_model-256_n_layer-16,L1,-0.3589719843034007
+caduceus-ps_seqlen-131k_d_model-256_n_layer-16,MIR,-0.2251117289837422
+caduceus-ps_seqlen-131k_d_model-256_n_layer-16,L2,-0.18791162514590004
+caduceus-ps_seqlen-131k_d_model-256_n_layer-16,LTR,-0.3045825263037034
+caduceus-ps_seqlen-131k_d_model-256_n_layer-16,DNA transposon,-0.13624984004322277
+caduceus-ps_seqlen-131k_d_model-256_n_layer-16,simple repeat,-0.058299985763524624
+caduceus-ps_seqlen-131k_d_model-256_n_layer-16,low complexity,0.007533163998761482
+caduceus-ps_seqlen-131k_d_model-256_n_layer-16,other repeat,-0.010173109262593166
+caduceus-ps_seqlen-131k_d_model-256_n_layer-16,gc,0.11077045577303717
+caduceus-ps_seqlen-131k_d_model-256_n_layer-16,cpg_obs_exp,0.00403055916679994
+caduceus-ps_seqlen-131k_d_model-256_n_layer-16,longest_homopolymer,-0.2599390475102283
+caduceus-ps_seqlen-131k_d_model-256_n_layer-16,tandem_repeat_score,-0.04982719565620904
+caduceus-ps_seqlen-131k_d_model-256_n_layer-16,trinucleotide_entropy,-0.14096623881414946
+caduceus-ps_seqlen-1k_d_model-118_n_layer-4_lr-8e-3,Alu,-0.513705441712786
+caduceus-ps_seqlen-1k_d_model-118_n_layer-4_lr-8e-3,L1,-0.245617067894908
+caduceus-ps_seqlen-1k_d_model-118_n_layer-4_lr-8e-3,MIR,-0.15449214109055592
+caduceus-ps_seqlen-1k_d_model-118_n_layer-4_lr-8e-3,L2,-0.091712748909671
+caduceus-ps_seqlen-1k_d_model-118_n_layer-4_lr-8e-3,LTR,-0.14378512274168967
+caduceus-ps_seqlen-1k_d_model-118_n_layer-4_lr-8e-3,DNA transposon,-0.030975752333783198
+caduceus-ps_seqlen-1k_d_model-118_n_layer-4_lr-8e-3,simple repeat,-0.151453625761285
+caduceus-ps_seqlen-1k_d_model-118_n_layer-4_lr-8e-3,low complexity,-0.006578522557320062
+caduceus-ps_seqlen-1k_d_model-118_n_layer-4_lr-8e-3,other repeat,0.006276609888907764
+caduceus-ps_seqlen-1k_d_model-118_n_layer-4_lr-8e-3,gc,0.1979004740398873
+caduceus-ps_seqlen-1k_d_model-118_n_layer-4_lr-8e-3,cpg_obs_exp,0.0425719509352463
+caduceus-ps_seqlen-1k_d_model-118_n_layer-4_lr-8e-3,longest_homopolymer,-0.375276936826363
+caduceus-ps_seqlen-1k_d_model-118_n_layer-4_lr-8e-3,tandem_repeat_score,-0.19217548199196424
+caduceus-ps_seqlen-1k_d_model-118_n_layer-4_lr-8e-3,trinucleotide_entropy,-0.02120213535172663
+caduceus-ps_seqlen-1k_d_model-256_n_layer-4_lr-8e-3,Alu,-0.44905566818423287
+caduceus-ps_seqlen-1k_d_model-256_n_layer-4_lr-8e-3,L1,-0.2948011815925655
+caduceus-ps_seqlen-1k_d_model-256_n_layer-4_lr-8e-3,MIR,-0.20503930126883113
+caduceus-ps_seqlen-1k_d_model-256_n_layer-4_lr-8e-3,L2,-0.11850207657744796
+caduceus-ps_seqlen-1k_d_model-256_n_layer-4_lr-8e-3,LTR,-0.19931857345961088
+caduceus-ps_seqlen-1k_d_model-256_n_layer-4_lr-8e-3,DNA transposon,-0.02730184512062147
+caduceus-ps_seqlen-1k_d_model-256_n_layer-4_lr-8e-3,simple repeat,-0.10822387322141121
+caduceus-ps_seqlen-1k_d_model-256_n_layer-4_lr-8e-3,low complexity,0.007393382845577494
+caduceus-ps_seqlen-1k_d_model-256_n_layer-4_lr-8e-3,other repeat,0.008336075354064106
+caduceus-ps_seqlen-1k_d_model-256_n_layer-4_lr-8e-3,gc,0.1426882122371566
+caduceus-ps_seqlen-1k_d_model-256_n_layer-4_lr-8e-3,cpg_obs_exp,0.059563764464095614
+caduceus-ps_seqlen-1k_d_model-256_n_layer-4_lr-8e-3,longest_homopolymer,-0.2954057527440281
+caduceus-ps_seqlen-1k_d_model-256_n_layer-4_lr-8e-3,tandem_repeat_score,-0.15194802028837595
+caduceus-ps_seqlen-1k_d_model-256_n_layer-4_lr-8e-3,trinucleotide_entropy,-0.016185651752272726
 evo-1-8k-base,Alu,-0.17274040172508714
 evo-1-8k-base,L1,-0.17258845704254994
 evo-1-8k-base,MIR,-0.1309653041035799

@@ -19,6 +19,66 @@ GROVER,low complexity,3,0.6666666666666666,-2.5560791
 GROVER,none,684,0.9093567251461988,-5.9279084
 GROVER,other repeat,49,0.8979591836734694,-9.132706
 GROVER,simple repeat,11,1.0,-11.228229
+caduceus-ph_seqlen-131k_d_model-256_n_layer-16,Alu,259,1.0,-12.100369
+caduceus-ph_seqlen-131k_d_model-256_n_layer-16,DNA transposon,149,0.9865771812080537,-9.477429
+caduceus-ph_seqlen-131k_d_model-256_n_layer-16,L1,306,1.0,-13.646154
+caduceus-ph_seqlen-131k_d_model-256_n_layer-16,L2,101,0.9900990099009901,-10.365567
+caduceus-ph_seqlen-131k_d_model-256_n_layer-16,LTR,617,0.9821717990275527,-10.605097
+caduceus-ph_seqlen-131k_d_model-256_n_layer-16,MIR,130,0.9923076923076923,-10.28143
+caduceus-ph_seqlen-131k_d_model-256_n_layer-16,low complexity,3,1.0,-2.4795778
+caduceus-ph_seqlen-131k_d_model-256_n_layer-16,none,684,0.9166666666666666,-5.3599434
+caduceus-ph_seqlen-131k_d_model-256_n_layer-16,other repeat,49,0.9387755102040817,-7.612243
+caduceus-ph_seqlen-131k_d_model-256_n_layer-16,simple repeat,11,1.0,-7.4382644
+caduceus-ph_seqlen-1k_d_model-118_n_layer-4_lr-8e-3,Alu,259,0.9961389961389961,-12.623072
+caduceus-ph_seqlen-1k_d_model-118_n_layer-4_lr-8e-3,DNA transposon,149,0.912751677852349,-4.680901
+caduceus-ph_seqlen-1k_d_model-118_n_layer-4_lr-8e-3,L1,306,0.954248366013072,-10.357773
+caduceus-ph_seqlen-1k_d_model-118_n_layer-4_lr-8e-3,L2,101,0.9405940594059405,-4.5803475
+caduceus-ph_seqlen-1k_d_model-118_n_layer-4_lr-8e-3,LTR,617,0.946515397082658,-7.5246925
+caduceus-ph_seqlen-1k_d_model-118_n_layer-4_lr-8e-3,MIR,130,0.9615384615384616,-5.7582498
+caduceus-ph_seqlen-1k_d_model-118_n_layer-4_lr-8e-3,low complexity,3,0.6666666666666666,-5.0234323
+caduceus-ph_seqlen-1k_d_model-118_n_layer-4_lr-8e-3,none,684,0.881578947368421,-3.1616728
+caduceus-ph_seqlen-1k_d_model-118_n_layer-4_lr-8e-3,other repeat,49,0.8163265306122449,-4.7625556
+caduceus-ph_seqlen-1k_d_model-118_n_layer-4_lr-8e-3,simple repeat,11,1.0,-8.274361
+caduceus-ph_seqlen-1k_d_model-256_n_layer-4_lr-8e-3,Alu,259,1.0,-14.0282345
+caduceus-ph_seqlen-1k_d_model-256_n_layer-4_lr-8e-3,DNA transposon,149,0.9731543624161074,-6.5535183
+caduceus-ph_seqlen-1k_d_model-256_n_layer-4_lr-8e-3,L1,306,0.9836601307189542,-14.547015
+caduceus-ph_seqlen-1k_d_model-256_n_layer-4_lr-8e-3,L2,101,0.9504950495049505,-6.8035264
+caduceus-ph_seqlen-1k_d_model-256_n_layer-4_lr-8e-3,LTR,617,0.965964343598055,-9.064946
+caduceus-ph_seqlen-1k_d_model-256_n_layer-4_lr-8e-3,MIR,130,0.9923076923076923,-9.97725
+caduceus-ph_seqlen-1k_d_model-256_n_layer-4_lr-8e-3,low complexity,3,0.6666666666666666,-5.420819
+caduceus-ph_seqlen-1k_d_model-256_n_layer-4_lr-8e-3,none,684,0.8991228070175439,-4.404278
+caduceus-ph_seqlen-1k_d_model-256_n_layer-4_lr-8e-3,other repeat,49,0.8979591836734694,-8.320286
+caduceus-ph_seqlen-1k_d_model-256_n_layer-4_lr-8e-3,simple repeat,11,1.0,-8.9753
+caduceus-ps_seqlen-131k_d_model-256_n_layer-16,Alu,259,1.0,-13.566082
+caduceus-ps_seqlen-131k_d_model-256_n_layer-16,DNA transposon,149,0.9932885906040269,-11.353891
+caduceus-ps_seqlen-131k_d_model-256_n_layer-16,L1,306,0.9967320261437909,-16.002613
+caduceus-ps_seqlen-131k_d_model-256_n_layer-16,L2,101,0.9801980198019802,-12.104013
+caduceus-ps_seqlen-131k_d_model-256_n_layer-16,LTR,617,0.993517017828201,-12.890774
+caduceus-ps_seqlen-131k_d_model-256_n_layer-16,MIR,130,0.9923076923076923,-12.762128
+caduceus-ps_seqlen-131k_d_model-256_n_layer-16,low complexity,3,1.0,-6.059171
+caduceus-ps_seqlen-131k_d_model-256_n_layer-16,none,684,0.9473684210526315,-6.618074
+caduceus-ps_seqlen-131k_d_model-256_n_layer-16,other repeat,49,1.0,-8.806886
+caduceus-ps_seqlen-131k_d_model-256_n_layer-16,simple repeat,11,1.0,-9.482331
+caduceus-ps_seqlen-1k_d_model-118_n_layer-4_lr-8e-3,Alu,259,1.0,-15.780841
+caduceus-ps_seqlen-1k_d_model-118_n_layer-4_lr-8e-3,DNA transposon,149,0.9395973154362416,-6.1771975
+caduceus-ps_seqlen-1k_d_model-118_n_layer-4_lr-8e-3,L1,306,0.9836601307189542,-12.672755
+caduceus-ps_seqlen-1k_d_model-118_n_layer-4_lr-8e-3,L2,101,0.9504950495049505,-6.8438787
+caduceus-ps_seqlen-1k_d_model-118_n_layer-4_lr-8e-3,LTR,617,0.9416531604538088,-8.876919
+caduceus-ps_seqlen-1k_d_model-118_n_layer-4_lr-8e-3,MIR,130,0.9769230769230769,-8.876985
+caduceus-ps_seqlen-1k_d_model-118_n_layer-4_lr-8e-3,low complexity,3,0.3333333333333333,-0.14138079
+caduceus-ps_seqlen-1k_d_model-118_n_layer-4_lr-8e-3,none,684,0.8786549707602339,-3.9731696
+caduceus-ps_seqlen-1k_d_model-118_n_layer-4_lr-8e-3,other repeat,49,0.8979591836734694,-6.5015
+caduceus-ps_seqlen-1k_d_model-118_n_layer-4_lr-8e-3,simple repeat,11,1.0,-9.684127
+caduceus-ps_seqlen-1k_d_model-256_n_layer-4_lr-8e-3,Alu,259,0.9961389961389961,-14.584569
+caduceus-ps_seqlen-1k_d_model-256_n_layer-4_lr-8e-3,DNA transposon,149,0.9865771812080537,-7.3844247
+caduceus-ps_seqlen-1k_d_model-256_n_layer-4_lr-8e-3,L1,306,0.9869281045751634,-15.980497
+caduceus-ps_seqlen-1k_d_model-256_n_layer-4_lr-8e-3,L2,101,0.9900990099009901,-8.466099
+caduceus-ps_seqlen-1k_d_model-256_n_layer-4_lr-8e-3,LTR,617,0.9773095623987034,-10.477534
+caduceus-ps_seqlen-1k_d_model-256_n_layer-4_lr-8e-3,MIR,130,1.0,-11.271706
+caduceus-ps_seqlen-1k_d_model-256_n_layer-4_lr-8e-3,low complexity,3,1.0,-5.59787
+caduceus-ps_seqlen-1k_d_model-256_n_layer-4_lr-8e-3,none,684,0.9078947368421053,-4.729322
+caduceus-ps_seqlen-1k_d_model-256_n_layer-4_lr-8e-3,other repeat,49,0.9183673469387755,-8.173823
+caduceus-ps_seqlen-1k_d_model-256_n_layer-4_lr-8e-3,simple repeat,11,1.0,-9.6959
 evo-1-8k-base,Alu,259,0.9922779922779923,-9.537006
 evo-1-8k-base,DNA transposon,149,1.0,-9.669601
 evo-1-8k-base,L1,306,0.9901960784313726,-9.78912

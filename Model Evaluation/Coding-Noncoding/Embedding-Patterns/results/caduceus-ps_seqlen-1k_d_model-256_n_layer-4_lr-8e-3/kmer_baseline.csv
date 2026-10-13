@@ -1,0 +1,9 @@
+features,dims,test_accuracy,balanced_accuracy
+1-mer frequencies,4,0.75824,0.75824
+2-mer frequencies,16,0.8154,0.8154
+3-mer frequencies,64,0.86976,0.8697600000000001
+4-mer frequencies,256,0.88092,0.8809199999999999
+5-mer frequencies,1024,0.89524,0.89524
+6-mer frequencies,4096,0.8962,0.8962
+caduceus-ps_seqlen-1k_d_model-256_n_layer-4_lr-8e-3 embedding,512,0.91068,0.91068
+caduceus-ps_seqlen-1k_d_model-256_n_layer-4_lr-8e-3 residual after 1-6-mer regression,512,0.58148,0.58148

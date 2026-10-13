@@ -12,3 +12,11 @@ Hyena small-32k,0.956,0.593,256
 Hyena medium-160k,0.949,0.618,256
 Hyena medium-450k,0.942,0.621,256
 Hyena large-1m,0.946,0.620,256
+Caduceus-Ph 1k d118,0.936,0.574,118
+Caduceus-Ps 1k d118,0.948,0.579,236
+Caduceus-Ph 1k d256,0.958,0.589,256
+Caduceus-Ps 1k d256,0.969,0.599,512
+Caduceus-Ph 131k,0.971,0.654,256
+Caduceus-Ps 131k,0.983,0.655,512
+Evo 1,0.987,0.673,4096
+Evo 2,0.983,0.664,4096

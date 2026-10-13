@@ -1,4 +1,4 @@
-"""Builds the tables and figures for report.typ from the result CSVs (Evo and Evo 2 excluded).
+"""Builds the tables and figures for report.typ from the result CSVs .
 
     pixi run python report/make_tables.py
     typst compile report/report.typ
@@ -37,6 +37,14 @@ MODELS = {
     "hyenadna-medium-160k-seqlen-hf": "Hyena medium-160k",
     "hyenadna-medium-450k-seqlen-hf": "Hyena medium-450k",
     "hyenadna-large-1m-seqlen-hf": "Hyena large-1m",
+    "caduceus-ph_seqlen-1k_d_model-118_n_layer-4_lr-8e-3": "Caduceus-Ph 1k d118",
+    "caduceus-ps_seqlen-1k_d_model-118_n_layer-4_lr-8e-3": "Caduceus-Ps 1k d118",
+    "caduceus-ph_seqlen-1k_d_model-256_n_layer-4_lr-8e-3": "Caduceus-Ph 1k d256",
+    "caduceus-ps_seqlen-1k_d_model-256_n_layer-4_lr-8e-3": "Caduceus-Ps 1k d256",
+    "caduceus-ph_seqlen-131k_d_model-256_n_layer-16": "Caduceus-Ph 131k",
+    "caduceus-ps_seqlen-131k_d_model-256_n_layer-16": "Caduceus-Ps 131k",
+    "evo-1-8k-base": "Evo 1",
+    "evo2_7b": "Evo 2",
 }
 EDITS = ["original", "nucleotide shuffle (keeps GC)", "dinucleotide Markov (keeps 2-mers)",
          "codon shuffle (keeps codon usage)", "synonymous swap (keeps protein)", "stops in frame",
@@ -111,7 +119,9 @@ for ds, root in DATASETS.items():
 
     # Experiment A: k-mer baseline
     kmer = per_model(root, "kmer_baseline.csv")
-    metric = "balanced_accuracy" if "balanced_accuracy" in kmer else "test_accuracy"
+    # Older GB runs only recorded accuracy (equal to balanced accuracy there, since the GB test set is balanced).
+    metric = "balanced_accuracy" if ds != "gb" else "accuracy"
+    kmer[metric] = kmer.get("balanced_accuracy", kmer.test_accuracy).fillna(kmer.test_accuracy)
     kmer["feature"] = kmer.features.str.extract(r"^(\d-mer)")[0].fillna(
         kmer.features.str.contains("residual").map({True: "residual", False: "embedding"}))
     wide = ordered(kmer.pivot(index="model", columns="feature", values=metric))
@@ -163,7 +173,7 @@ for ds, root in DATASETS.items():
     save(cw.rename(columns=short).assign(**{"CV R²": r2.r2_features_to_coding_score}), f"{ds}_nc_corr", digits=2)
 
     # Figures
-    fig, ax = plt.subplots(figsize=(8, 3.4))
+    fig, ax = plt.subplots(figsize=(10, 3.6))
     x = np.arange(len(wide))
     ax.bar(x - 0.2, wide.embedding, 0.4, label="embedding probe")
     ax.bar(x + 0.2, wide.residual, 0.4, label="residual probe (k-mer part removed)")
@@ -178,7 +188,7 @@ for ds, root in DATASETS.items():
     fig.savefig(FIGS / f"{ds}_kmer.png", dpi=200)
     plt.close(fig)
 
-    fig, axes = plt.subplots(1, 2, figsize=(11, 4.2), layout="constrained")
+    fig, axes = plt.subplots(1, 2, figsize=(11, 1.2 + 0.24 * len(wide)), layout="constrained")
     for ax, (group, short) in zip(axes, GROUPS.items()):
         w = ordered(pert[pert.group == group].pivot(index="model", columns="edit", values="frac_called_coding"))[EDITS]
         w.columns = EDIT_SHORT
@@ -189,7 +199,7 @@ for ds, root in DATASETS.items():
     fig.savefig(FIGS / f"{ds}_perturb.png", dpi=200, bbox_inches="tight")
     plt.close(fig)
 
-    fig, axes = plt.subplots(1, 2, figsize=(11, 3.6))
+    fig, axes = plt.subplots(1, 2, figsize=(13, 3.8))
     pt = ordered(pos_tab)
     x = np.arange(len(pt))
     axes[0].bar(x - 0.2, pt["coding ratio"], 0.4, label="coding")
@@ -212,7 +222,7 @@ for ds, root in DATASETS.items():
     fig.savefig(FIGS / f"{ds}_codon.png", dpi=200)
     plt.close(fig)
 
-    fig, axes = plt.subplots(1, 2, figsize=(13, 4.4), layout="constrained", gridspec_kw={"width_ratios": [len(bc.columns), len(cw.columns)]})
+    fig, axes = plt.subplots(1, 2, figsize=(13, 1.6 + 0.24 * len(wide)), layout="constrained", gridspec_kw={"width_ratios": [len(bc.columns), len(cw.columns)]})
     bc_lab = bc.copy()
     bc_lab.columns = [f"{c} (n={counts[c]})" for c in bc.columns]
     im1 = heat(axes[0], bc_lab, "Fraction called non-coding, by repeat class")
@@ -224,6 +234,3 @@ for ds, root in DATASETS.items():
     plt.close(fig)
 
     print(f"{ds}: {len(wide)} models")
-
-leaked = [p.name for p in DATA.glob("*.csv") if "evo" in p.read_text().lower()]
-assert not leaked, f"Evo rows in {leaked}"

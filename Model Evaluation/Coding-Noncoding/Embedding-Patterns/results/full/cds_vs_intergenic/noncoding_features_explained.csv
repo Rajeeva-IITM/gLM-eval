@@ -1,6 +1,12 @@
 model,r2_features_to_coding_score
 DNABERT-2-117M,0.5555812560670177
 GROVER,0.5043649203103602
+caduceus-ph_seqlen-131k_d_model-256_n_layer-16,0.5676093950739607
+caduceus-ph_seqlen-1k_d_model-118_n_layer-4_lr-8e-3,0.4886278176716976
+caduceus-ph_seqlen-1k_d_model-256_n_layer-4_lr-8e-3,0.49486627506979575
+caduceus-ps_seqlen-131k_d_model-256_n_layer-16,0.46742760352960405
+caduceus-ps_seqlen-1k_d_model-118_n_layer-4_lr-8e-3,0.5049165976482014
+caduceus-ps_seqlen-1k_d_model-256_n_layer-4_lr-8e-3,0.5273348142679086
 evo-1-8k-base,0.4771341418237142
 evo2_7b,0.4541826599249035
 hyenadna-large-1m-seqlen-hf,0.40204805396945753

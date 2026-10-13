@@ -51,9 +51,8 @@
 *Scope.* This report describes four experiments that probe what frozen embeddings of genomic language models (gLMs)
 encode about protein-coding versus non-coding DNA, and lists their results. Each experiment was run on two kinds of
 data: the 200 bp Genomic Benchmarks coding vs intergenomic windows, and full-length human sequences (complete coding
-sequences against intergenic, lncRNA and intron sequences). Thirteen models from four families were evaluated.
-Evo 1 and Evo 2 were also run but are not included here; their full-length runs were still in progress when this
-report was written. The report gives methods, rationale and results only. Interpretation and discussion are left out.
+sequences against intergenic, lncRNA and intron sequences). Twenty-one models from six families were evaluated.
+The report gives methods, rationale and results only. Interpretation and discussion are left out.
 
 #outline(depth: 2, indent: auto)
 
@@ -65,8 +64,11 @@ stretch of DNA embedded in one forward pass; longer sequences are split into chu
 #figure(
   kind: table,
   caption: [Models evaluated. Embedding width is the size of the last hidden layer.],
-  text(size: 8pt, table(
-    columns: 6,
+  text(size: 8pt, {
+  // Let long model IDs break after "_", "-" and "/".
+  show regex("[_/-]"): it => it + "\u{200B}"
+  table(
+    columns: (auto, 1fr, auto, auto, auto, auto),
     align: (left, left, left, left, right, right),
     stroke: none,
     inset: (x: 4pt, y: 2.5pt),
@@ -86,11 +88,21 @@ stretch of DNA embedded in one forward pass; longer sequences are split into chu
     [Hyena medium-160k], […/hyenadna-medium-160k-seqlen-hf], [Hyena, single nucleotide], [human], [256], [10,000],
     [Hyena medium-450k], […/hyenadna-medium-450k-seqlen-hf], [Hyena, single nucleotide], [human], [256], [10,000],
     [Hyena large-1m], […/hyenadna-large-1m-seqlen-hf], [Hyena, single nucleotide], [human], [256], [10,000],
+    [Caduceus-Ph 1k d118], [kuleshov-group/caduceus-ph_seqlen-1k_d_model-118_n_layer-4_lr-8e-3], [BiMamba, single nucleotide], [human], [118], [1,000],
+    [Caduceus-Ps 1k d118], […/caduceus-ps_seqlen-1k_d_model-118_n_layer-4_lr-8e-3], [BiMamba RC-equivariant, single nucleotide], [human], [236], [1,000],
+    [Caduceus-Ph 1k d256], […/caduceus-ph_seqlen-1k_d_model-256_n_layer-4_lr-8e-3], [BiMamba, single nucleotide], [human], [256], [1,000],
+    [Caduceus-Ps 1k d256], […/caduceus-ps_seqlen-1k_d_model-256_n_layer-4_lr-8e-3], [BiMamba RC-equivariant, single nucleotide], [human], [512], [1,000],
+    [Caduceus-Ph 131k], […/caduceus-ph_seqlen-131k_d_model-256_n_layer-16], [BiMamba, single nucleotide], [human], [256], [10,000],
+    [Caduceus-Ps 131k], […/caduceus-ps_seqlen-131k_d_model-256_n_layer-16], [BiMamba RC-equivariant, single nucleotide], [human], [512], [10,000],
+    [Evo 1], [togethercomputer/evo-1-8k-base (`evo-1-8k-base`)], [StripedHyena 7B, single nucleotide], [prokaryotes and phages], [4096], [4,000],
+    [Evo 2], [arcinstitute/evo2_7b (`evo2_7b`)], [StripedHyena 2 7B, single nucleotide], [all domains of life], [4096], [2,000],
     table.hline(),
-  )),
+  )}),
 ) <tab-models>
 
-Not included (pending): Evo 1 (`evo-1-8k-base`) and Evo 2 (`evo2_7b`).
+Caduceus-Ph and -Ps are the two Caduceus variants: Ph is trained with reverse-complement data augmentation, while Ps
+is reverse-complement equivariant by construction. Its hidden state holds a forward and a reverse-complement half,
+so its embedding width is twice the model dimension. The two halves are used as they are, without averaging.
 
 = Common methodology
 
@@ -105,8 +117,12 @@ Model-specific details, needed for reproduction:
   flash-attention kernel is disabled so the PyTorch attention path is used.
 - *NT-v2* needs the same older transformers. It loads with `AutoModelForMaskedLM` with `output_hidden_states=True`,
   and the last hidden state is taken.
-- *HyenaDNA* has no attention mask. Chunks of different lengths are therefore never batched together, so no padding
-  enters its causal hidden states.
+- *HyenaDNA* and *Caduceus* take no attention mask. Chunks of different lengths are therefore never batched
+  together, so no padding enters their hidden states (causal for HyenaDNA, bidirectional for Caduceus). Caduceus
+  needs transformers 4.46 with `mamba-ssm` 2.2.5 and `causal-conv1d` 1.5.2 and loads with `AutoModel`.
+- *Evo 1* and *Evo 2* load through their own packages (`evo-model`, `evo2`). Embeddings are the output of the
+  final normalisation layer (the last hidden layer), captured with a forward hook and mean-pooled. Tokens are single
+  characters with no special tokens, and only equal-length chunks are batched, so there is no padding.
 
 == Long sequences: chunk and average <sec-chunk>
 Full-length sequences (300 bp to 10 kb) are often longer than a model's context. A sequence of length $L$ is split
@@ -116,7 +132,9 @@ chunk is embedded, and the sequence embedding is the mean of the chunk embedding
 The windows were chosen as follows:
 - GROVER and DNABERT-2 are limited to 512 tokens. 1.5 kb stays below that even for poorly compressible sequence;
   2 kb reached about 550 tokens.
-- The HyenaDNA 1k models use their 1 kb training length.
+- The HyenaDNA and Caduceus 1k models use their 1 kb training length.
+- Evo 1 (4 kb) and Evo 2 (2 kb) are limited by GPU memory on a shared 24 GB A10, not by context length. Evo 1
+  at 8 kb ran out of memory.
 - The other models use 10 kb, so a sequence is never split for them.
 
 Every 200 bp window is a single chunk, so in that case the embedding is the plain per-sequence embedding.
@@ -139,8 +157,9 @@ from the model's response to the edit.
 
 == Software
 - Analyses are in `Model Evaluation/Coding-Noncoding/Embedding-Patterns/`.
-- They run under pixi with three environments: `default` (transformers 5), `legacy` (transformers 4.44–4.46,
-  for DNABERT-2 and NT-v2), and separate environments for Evo.
+- They run under pixi with five environments: `default` (transformers 5; GROVER, HyenaDNA), `legacy`
+  (transformers 4.44–4.46; DNABERT-2, NT-v2), `caduceus`, `evo` and `evo2` (PyPI torch 2.7.1 with prebuilt
+  CUDA kernels).
 - Hardware: NVIDIA A10 GPUs (24 GB).
 
 = Datasets

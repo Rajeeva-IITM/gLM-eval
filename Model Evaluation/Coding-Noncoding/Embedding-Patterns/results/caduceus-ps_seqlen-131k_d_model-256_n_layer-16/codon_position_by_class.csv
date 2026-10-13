@@ -1,0 +1,22 @@
+group,codon_pos,mut_class,mean_abs_delta,n
+coding,1,missense,0.3867147,53002
+coding,1,nonsense,0.970628,4160
+coding,1,synonymous,0.497872,2238
+coding,2,missense,0.3984039,57970
+coding,2,nonsense,0.60101295,1430
+coding,3,missense,0.3469079,18683
+coding,3,nonsense,0.74647075,1904
+coding,3,synonymous,0.3401398,38813
+non-coding (frame 0),1,missense,0.23303746,50541
+non-coding (frame 0),1,nonsense,0.23288135,3492
+non-coding (frame 0),1,stop-loss,0.30007815,3033
+non-coding (frame 0),1,synonymous,0.26626,2334
+non-coding (frame 0),2,missense,0.23173195,53897
+non-coding (frame 0),2,nonsense,0.25349486,2470
+non-coding (frame 0),2,stop-loss,0.2772153,2277
+non-coding (frame 0),2,stop-to-stop,0.25704572,756
+non-coding (frame 0),3,missense,0.24051386,19634
+non-coding (frame 0),3,nonsense,0.22712709,2278
+non-coding (frame 0),3,stop-loss,0.26280734,2390
+non-coding (frame 0),3,stop-to-stop,0.22200157,643
+non-coding (frame 0),3,synonymous,0.23448779,34455

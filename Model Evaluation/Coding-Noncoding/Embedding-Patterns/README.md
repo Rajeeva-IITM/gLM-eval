@@ -29,6 +29,7 @@ Some models need their own pixi environment:
 |---|---|---|
 | GROVER, HyenaDNA | `default` | `LongSafari/hyenadna-large-1m-seqlen-hf` |
 | DNABERT-2, Nucleotide Transformer v2 | `legacy` (transformers 4.x) | `zhihan1996/DNABERT-2-117M` |
+| Caduceus | `caduceus` (mamba-ssm, transformers 4.x) | `kuleshov-group/caduceus-ps_seqlen-131k_d_model-256_n_layer-16` |
 | Evo | `evo` | `evo-1-8k-base` |
 | Evo 2 (7B only on non-Hopper GPUs) | `evo2` | `evo2_7b` |
 
