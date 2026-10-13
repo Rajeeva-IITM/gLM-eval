@@ -39,8 +39,9 @@ IS_DNABERT2 = "DNABERT-2" in MODEL_NAME
 IS_MLM = "nucleotide-transformer-v2" in MODEL_NAME
 IS_EVO = MODEL_NAME.startswith(("evo-", "evo2_"))
 # Longest chunk (bp) each model embeds in one pass; longer sequences are split into near-equal chunks and averaged.
-# GROVER/DNABERT-2: 1.5 kb stays under 512 BPE tokens even for low-compressing sequence (2 kb can reach ~550). Evo 2 is limited by memory on a shared 24 GB GPU, not context.
-WINDOWS = {"GROVER": 1500, "DNABERT-2": 1500, "hyenadna-tiny-1k": 1000, "evo-1": 8000, "evo2_": 2000}
+# GROVER/DNABERT-2: 1.5 kb stays under 512 BPE tokens even for low-compressing sequence (2 kb can reach ~550).
+# Evo windows are limited by memory on a shared 24 GB GPU, not context (Evo 1 at 8 kb peaks at ~16 GB).
+WINDOWS = {"GROVER": 1500, "DNABERT-2": 1500, "hyenadna-tiny-1k": 1000, "evo-1": 4000, "evo2_": 2000}
 WINDOW = next((w for key, w in WINDOWS.items() if key in MODEL_NAME), 10_000)
 
 NO_MASK = IS_EVO or "hyenadna" in MODEL_NAME

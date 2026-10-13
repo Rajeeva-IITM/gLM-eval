@@ -1,6 +1,8 @@
 model,r2_features_to_coding_score
 DNABERT-2-117M,0.5555812560670177
 GROVER,0.5043649203103602
+evo-1-8k-base,0.4771341418237142
+evo2_7b,0.4541826599249035
 hyenadna-large-1m-seqlen-hf,0.40204805396945753
 hyenadna-medium-160k-seqlen-hf,0.5006296531807282
 hyenadna-medium-450k-seqlen-hf,0.45992681082075315

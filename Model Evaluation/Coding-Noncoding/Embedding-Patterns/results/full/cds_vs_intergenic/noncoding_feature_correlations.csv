@@ -27,6 +27,34 @@ GROVER,cpg_obs_exp,0.011079342523827326
 GROVER,longest_homopolymer,-0.13750108344725204
 GROVER,tandem_repeat_score,-0.24282779475102786
 GROVER,trinucleotide_entropy,0.23608850186069755
+evo-1-8k-base,Alu,-0.19898430350695837
+evo-1-8k-base,L1,-0.2513786754838722
+evo-1-8k-base,MIR,-0.017746265388640294
+evo-1-8k-base,L2,-0.05424645832236199
+evo-1-8k-base,LTR,0.05863739016309406
+evo-1-8k-base,DNA transposon,-0.1145385644825913
+evo-1-8k-base,simple repeat,-0.2958640441421257
+evo-1-8k-base,low complexity,-0.09957666059461373
+evo-1-8k-base,other repeat,0.18849728743059946
+evo-1-8k-base,gc,0.5069727383811042
+evo-1-8k-base,cpg_obs_exp,0.12531170869212588
+evo-1-8k-base,longest_homopolymer,-0.4419947183616382
+evo-1-8k-base,tandem_repeat_score,-0.31170790274054166
+evo-1-8k-base,trinucleotide_entropy,0.16693019223455943
+evo2_7b,Alu,-0.034910268521985865
+evo2_7b,L1,-0.40786363282077553
+evo2_7b,MIR,0.18111958404629983
+evo2_7b,L2,0.10627076901225772
+evo2_7b,LTR,0.1267448564079852
+evo2_7b,DNA transposon,0.06063965766051692
+evo2_7b,simple repeat,0.00854017075654215
+evo2_7b,low complexity,0.08596757274452899
+evo2_7b,other repeat,-0.0333374653605967
+evo2_7b,gc,0.3599351930838841
+evo2_7b,cpg_obs_exp,0.09565675547173237
+evo2_7b,longest_homopolymer,-0.06995443992537034
+evo2_7b,tandem_repeat_score,-0.317680699015547
+evo2_7b,trinucleotide_entropy,0.3903318771686994
 hyenadna-large-1m-seqlen-hf,Alu,-0.3642668413388081
 hyenadna-large-1m-seqlen-hf,L1,-0.36290095244659476
 hyenadna-large-1m-seqlen-hf,MIR,0.11839171510795722

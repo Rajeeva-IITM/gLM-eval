@@ -19,6 +19,26 @@ GROVER,low complexity,5,1.0,-18.51575
 GROVER,none,621,0.9726247987117552,-13.992864
 GROVER,other repeat,26,1.0,-12.238806
 GROVER,simple repeat,23,0.9565217391304348,-16.984539
+evo-1-8k-base,Alu,571,1.0,-8.784795
+evo-1-8k-base,DNA transposon,118,1.0,-8.66336
+evo-1-8k-base,L1,123,1.0,-9.074835
+evo-1-8k-base,L2,84,1.0,-7.8530207
+evo-1-8k-base,LTR,68,1.0,-8.926274
+evo-1-8k-base,MIR,169,1.0,-7.47813
+evo-1-8k-base,low complexity,5,1.0,-10.923547
+evo-1-8k-base,none,621,0.998389694041868,-7.1270876
+evo-1-8k-base,other repeat,26,1.0,-8.014939
+evo-1-8k-base,simple repeat,23,1.0,-7.9487867
+evo2_7b,Alu,571,1.0,-4.8307366
+evo2_7b,DNA transposon,118,1.0,-5.0370708
+evo2_7b,L1,123,1.0,-5.373978
+evo2_7b,L2,84,1.0,-5.237623
+evo2_7b,LTR,68,1.0,-4.783947
+evo2_7b,MIR,169,1.0,-5.001381
+evo2_7b,low complexity,5,1.0,-5.836442
+evo2_7b,none,621,0.9967793880837359,-5.0023026
+evo2_7b,other repeat,26,1.0,-5.261765
+evo2_7b,simple repeat,23,1.0,-5.516873
 hyenadna-large-1m-seqlen-hf,Alu,571,1.0,-17.821695
 hyenadna-large-1m-seqlen-hf,DNA transposon,118,0.9915254237288136,-8.63286
 hyenadna-large-1m-seqlen-hf,L1,123,1.0,-11.373065

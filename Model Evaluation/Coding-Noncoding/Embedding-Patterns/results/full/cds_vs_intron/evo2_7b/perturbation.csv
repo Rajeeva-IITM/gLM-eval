@@ -1,0 +1,17 @@
+group,edit,mean_coding_score,frac_called_coding
+coding,original,20.518887,0.9907356948228883
+coding,nucleotide shuffle (keeps GC),-3.6087315,0.009264305177111716
+coding,dinucleotide Markov (keeps 2-mers),-3.445699,0.013079019073569483
+coding,codon shuffle (keeps codon usage),-3.177409,0.013623978201634877
+coding,synonymous swap (keeps protein),9.510703,0.8937329700272479
+coding,stops in frame,2.0831547,0.6779291553133515
+coding,stops out of frame (control),10.720621,0.973841961852861
+coding,reverse complement,15.984962,0.9307901907356948
+non-coding (frame 0),original,-5.0057535,0.0011061946902654867
+non-coding (frame 0),nucleotide shuffle (keeps GC),-4.890825,0.0005530973451327434
+non-coding (frame 0),dinucleotide Markov (keeps 2-mers),-4.984645,0.0005530973451327434
+non-coding (frame 0),codon shuffle (keeps codon usage),-4.910468,0.0005530973451327434
+non-coding (frame 0),synonymous swap (keeps protein),-4.7975287,0.0
+non-coding (frame 0),stops in frame,-5.0967207,0.0
+non-coding (frame 0),stops out of frame (control),-5.0966935,0.0
+non-coding (frame 0),reverse complement,-3.5976617,0.004424778761061947
