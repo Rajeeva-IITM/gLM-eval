@@ -1,3 +1,6 @@
 annotation_testing/
 # pixi environments
 .pixi
+
+# Reference papers (kept locally, not in the repository)
+Papers/
