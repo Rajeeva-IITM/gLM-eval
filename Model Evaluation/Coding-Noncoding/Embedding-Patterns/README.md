@@ -37,4 +37,6 @@ Example: `GLM_MODEL=evo2_7b pixi run -e evo2 python kmer_baseline.py`
 
 `pixi run python compare.py` collects every model's results into `results/summary.csv`.
 
+`pixi run python sample_size.py` refits the probe on balanced subsets of 500 to all training sequences (cached embeddings, no GPU) and writes `results/sample_size*.csv`.
+
 Note: Genomic Benchmarks coding windows are not aligned to the reading frame. A frame is inferred only when exactly one forward frame has no stop codon. Sequences without a unique frame are dropped from `perturb.py` and `codon_position.py`.

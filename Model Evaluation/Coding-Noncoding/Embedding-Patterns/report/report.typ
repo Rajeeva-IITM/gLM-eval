@@ -48,7 +48,7 @@
 ]
 
 #v(1em)
-*Scope.* This report describes four experiments that probe what frozen embeddings of genomic language models (gLMs)
+*Scope.* This report describes four experiments, and a training-set size robustness analysis, that probe what frozen embeddings of genomic language models (gLMs)
 encode about protein-coding versus non-coding DNA, and lists their results. Each experiment was run on two kinds of
 data: the 200 bp Genomic Benchmarks coding vs intergenomic windows, and full-length human sequences (complete coding
 sequences against intergenic, lncRNA and intron sequences). Twenty-one models from six families were evaluated.
@@ -442,6 +442,47 @@ entropy. In the full-length correlation tables the repeat-class columns are cove
     caption: [Fraction called non-coding by repeat class (left) and feature correlations with the coding score (right), #title.])
 }
 #set page(flipped: false)
+
+= Robustness to training-set size
+
+== Rationale
+The full-length sets were capped at 10,000 sequences per class, and every experiment uses a probe trained on all
+available training sequences. This section measures how probe accuracy and the probe itself change when the probe
+is trained on fewer sequences. If both are already stable well below the sizes used, the results do not depend on
+the choice of cap.
+
+== Method
+- *Reference probe:* the standard probe trained on the whole training set, as in Experiments A–D (200 bp: 75,000
+  windows; full length: 15,575–16,219 sequences, 7,410–8,165 per class).
+- *Subset probes:* the same probe trained on balanced random subsets of $n$ training sequences ($n slash 2$ per
+  class), for $n$ = 500, 1,000, 2,000, 5,000 and 10,000, plus 20,000 and 50,000 for 200 bp, plus the largest
+  balanced subset available (twice the size of the smaller class). Ten subsets are drawn per size (seeds 0–9); a
+  subset equal to the whole training set is fitted once.
+- Each subset probe is evaluated on the unchanged full test set and compared with the reference probe:
+  - *test accuracy* (balanced accuracy for full length);
+  - *Pearson correlation of coding scores* with the reference scores over the test set. For two linear probes this
+    is the cosine similarity of their directions measured under the covariance of the test embeddings, so it
+    compares the probes along directions in which the embeddings actually vary;
+  - *Spearman correlation* of the scores, and the *fraction of identical calls* (coding / non-coding);
+  - *cosine similarity of the weight vectors* in raw embedding space (logistic-regression coefficients divided by
+    the standardisation scale). Embedding dimensions are strongly correlated, so different weight vectors can
+    produce nearly identical scores; this metric is reported for completeness.
+- Script: `sample_size.py` (cached embeddings only). Full per-run results: `results/sample_size.csv`; mean and SD
+  over seeds: `results/sample_size_summary.csv`.
+
+== Results
+Table columns: _all data_ = accuracy of the reference probe; _1k_, _10k_ = mean test accuracy of subset probes
+trained on 1,000 or 10,000 sequences; _10k SD_ = its standard deviation over the 10 subsets; _Pearson_, _same
+call_ and _cosine_ = agreement with the reference probe, averaged over subsets.
+
+#for (ds, title) in datasets {
+  csvtable(ds + "_sample_size", [Probe accuracy and agreement with the reference probe by training-set size, #title.], size: 7pt)
+}
+
+#figure(image(F + "sample_size.png", width: 100%),
+  caption: [Test accuracy (top), Pearson correlation of coding scores with the reference probe (middle) and cosine
+  similarity of probe weights with the reference probe (bottom) against the number of training sequences. One line
+  per model, coloured by family; bands show ±1 SD over 10 subsets. Dotted line: 10,000 sequences.]) <fig-sample-size>
 
 #heading(numbering: none)[Appendix]
 

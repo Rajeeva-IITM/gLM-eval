@@ -234,3 +234,54 @@ for ds, root in DATASETS.items():
     plt.close(fig)
 
     print(f"{ds}: {len(wide)} models")
+
+# --- Robustness to training-set size (sample_size.py) ------------------------------------------------------------
+ss = pd.read_csv(RESULTS / "sample_size_summary.csv")
+ss = ss[ss.model.isin(MODELS)].assign(model=lambda d: d.model.map(MODELS))
+FAMILY_COLORS = {"GROVER": "tab:blue", "DNABERT-2": "tab:orange", "NT-v2": "tab:green", "Hyena": "tab:red",
+                 "Caduceus": "tab:purple", "Evo": "tab:brown"}
+
+
+def family(model):
+    return next(f for f in FAMILY_COLORS if model.startswith(f))
+
+
+for ds in DATASETS:
+    d = ss[ss.dataset == ds].set_index("model")
+    at = lambda n, col: d[d.n == n][col]
+    tab = pd.DataFrame({
+        "all data": at(d.n.max(), "reference_accuracy"),
+        "1k": at(1000, "accuracy_mean"),
+        "10k": at(10_000, "accuracy_mean"),
+        "10k SD": at(10_000, "accuracy_std"),
+        "Pearson 1k": at(1000, "pearson_to_reference_mean"),
+        "Pearson 10k": at(10_000, "pearson_to_reference_mean"),
+        "same call 10k": at(10_000, "same_call_as_reference_mean"),
+        "cosine 10k": at(10_000, "cosine_to_reference_mean"),
+    })
+    save(ordered(tab), f"{ds}_sample_size")
+
+fig, axes = plt.subplots(3, 4, figsize=(15, 9.5), sharex="col")
+rows = [("accuracy", "Test accuracy"), ("pearson_to_reference", "Pearson r of scores\nwith reference probe"),
+        ("cosine_to_reference", "Cosine of weights\nwith reference probe")]
+for j, ds in enumerate(DATASETS):
+    for i, (metric, label) in enumerate(rows):
+        ax = axes[i, j]
+        for model, g in ss[ss.dataset == ds].groupby("model"):
+            g = g.sort_values("n")
+            m, s = g[f"{metric}_mean"], g[f"{metric}_std"].fillna(0)
+            c = FAMILY_COLORS[family(model)]
+            ax.plot(g.n, m, color=c, lw=1, alpha=0.8)
+            ax.fill_between(g.n, np.clip(m - s, -1, 1), np.clip(m + s, -1, 1), color=c, alpha=0.12, lw=0)
+        ax.set_xscale("log")
+        ax.axvline(10_000, color="grey", ls=":", lw=1)
+        if i == 0:
+            ax.set_title(TITLES[ds], fontsize=9)
+        if j == 0:
+            ax.set_ylabel(label, fontsize=9)
+        if i == 2:
+            ax.set_xlabel("Training sequences (balanced)", fontsize=9)
+axes[0, 0].legend(handles=[plt.Line2D([], [], color=c, label=f) for f, c in FAMILY_COLORS.items()], fontsize=7)
+fig.tight_layout()
+fig.savefig(FIGS / "sample_size.png", dpi=200)
+plt.close(fig)
