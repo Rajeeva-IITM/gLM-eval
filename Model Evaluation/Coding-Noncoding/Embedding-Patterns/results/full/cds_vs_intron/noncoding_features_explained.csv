@@ -9,6 +9,10 @@ caduceus-ps_seqlen-1k_d_model-118_n_layer-4_lr-8e-3,0.5799285761656425
 caduceus-ps_seqlen-1k_d_model-256_n_layer-4_lr-8e-3,0.6434703138364742
 evo-1-8k-base,0.13352064485871978
 evo2_7b,0.09324483759356453
+gena-lm-bert-base-t2t,0.41184518951200283
+gena-lm-bert-base-t2t-multi,0.45361732096394924
+gena-lm-bert-large-t2t,0.4342751407610545
+gena-lm-bigbird-base-t2t,0.452337049675054
 hyenadna-large-1m-seqlen-hf,0.7626222015071715
 hyenadna-medium-160k-seqlen-hf,0.5719647556186891
 hyenadna-medium-450k-seqlen-hf,0.5458151724777182

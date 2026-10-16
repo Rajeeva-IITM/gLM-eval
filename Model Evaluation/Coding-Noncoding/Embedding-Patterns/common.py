@@ -35,14 +35,16 @@ CACHE = RESULTS / "embeddings.npz"
 STOPS = {"TAA", "TAG", "TGA"}
 device = "cuda" if torch.cuda.is_available() else "cpu"
 IS_DNABERT2 = "DNABERT-2" in MODEL_NAME
-# NT v2 exposes its custom code only through the masked-LM class; hidden states come from output_hidden_states.
-IS_MLM = "nucleotide-transformer-v2" in MODEL_NAME
+# NT v2 and GENA-LM BERT expose their custom code only through a masked-LM class; hidden states come from
+# output_hidden_states. NT v2 maps it to AutoModelForMaskedLM, GENA-LM BERT to AutoModel (AutoModelForMaskedLM would
+# load the stock BERT, which lacks GENA's pre-LayerNorm weights).
+IS_MLM = "nucleotide-transformer-v2" in MODEL_NAME or "gena-lm-bert" in MODEL_NAME
 IS_EVO = MODEL_NAME.startswith(("evo-", "evo2_"))
 # Longest chunk (bp) each model embeds in one pass; longer sequences are split into near-equal chunks and averaged.
 # GROVER/DNABERT-2: 1.5 kb stays under 512 BPE tokens even for low-compressing sequence (2 kb can reach ~550).
 # Evo windows are limited by memory on a shared 24 GB GPU, not context (Evo 1 at 8 kb peaks at ~16 GB).
-# "seqlen-1k" = the Caduceus models trained on 1 kb.
-WINDOWS = {"GROVER": 1500, "DNABERT-2": 1500, "hyenadna-tiny-1k": 1000, "seqlen-1k": 1000, "evo-1": 4000, "evo2_": 2000}
+# "seqlen-1k" = the Caduceus models trained on 1 kb. GENA-LM BERT (512 tokens): 2.5 kb needs at most ~460 tokens.
+WINDOWS = {"GROVER": 1500, "DNABERT-2": 1500, "hyenadna-tiny-1k": 1000, "seqlen-1k": 1000, "gena-lm-bert": 2500, "evo-1": 4000, "evo2_": 2000}
 WINDOW = next((w for key, w in WINDOWS.items() if key in MODEL_NAME), 10_000)
 
 # Caduceus (bidirectional Mamba) also takes no attention mask, and padding would leak into its reverse pass.
@@ -78,7 +80,7 @@ def load_model():
         from transformers import AutoModel, AutoModelForMaskedLM, AutoTokenizer, BertConfig
 
         _tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME, trust_remote_code=True)
-        model_cls = AutoModelForMaskedLM if IS_MLM else AutoModel
+        model_cls = AutoModelForMaskedLM if "nucleotide-transformer-v2" in MODEL_NAME else AutoModel
         # DNABERT-2 needs its config passed explicitly, or the remote config class clashes with BertConfig.
         kwargs = {"config": BertConfig.from_pretrained(MODEL_NAME)} if IS_DNABERT2 else {}
         _model = model_cls.from_pretrained(MODEL_NAME, trust_remote_code=True, **kwargs).to(device).eval()

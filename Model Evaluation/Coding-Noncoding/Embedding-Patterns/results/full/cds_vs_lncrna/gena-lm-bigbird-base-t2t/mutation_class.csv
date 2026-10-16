@@ -1,0 +1,11 @@
+group,mut_class,mean_delta,mean_abs_delta,n
+coding,missense,-0.018790334,0.36954525,39333
+coding,nonsense,-0.16721192,0.4339819,2254
+coding,stop-loss,0.1112847,0.50926214,105
+coding,stop-to-stop,8.936155e-05,0.4681847,21
+coding,synonymous,-0.004626799,0.38331428,12287
+non-coding (frame 0),missense,0.015751993,0.3288851,37610
+non-coding (frame 0),nonsense,-0.047426075,0.32268906,2571
+non-coding (frame 0),stop-loss,0.021010498,0.3509224,2577
+non-coding (frame 0),stop-to-stop,-0.052366816,0.3200393,492
+non-coding (frame 0),synonymous,0.0214396,0.32866335,10750

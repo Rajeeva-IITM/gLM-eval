@@ -139,6 +139,62 @@ evo2_7b,cpg_obs_exp,0.09565675547173237
 evo2_7b,longest_homopolymer,-0.06995443992537034
 evo2_7b,tandem_repeat_score,-0.317680699015547
 evo2_7b,trinucleotide_entropy,0.3903318771686994
+gena-lm-bert-base-t2t,Alu,-0.056308095659337025
+gena-lm-bert-base-t2t,L1,-0.5087545348072228
+gena-lm-bert-base-t2t,MIR,0.1867760293591582
+gena-lm-bert-base-t2t,L2,0.09635343635187026
+gena-lm-bert-base-t2t,LTR,-0.04738000823205311
+gena-lm-bert-base-t2t,DNA transposon,0.10632196356941112
+gena-lm-bert-base-t2t,simple repeat,0.0624706372428813
+gena-lm-bert-base-t2t,low complexity,0.08424869996217685
+gena-lm-bert-base-t2t,other repeat,-0.06351002956501017
+gena-lm-bert-base-t2t,gc,0.020522639743099633
+gena-lm-bert-base-t2t,cpg_obs_exp,0.024739528986003245
+gena-lm-bert-base-t2t,longest_homopolymer,-0.04653625978488035
+gena-lm-bert-base-t2t,tandem_repeat_score,-0.17448860612866265
+gena-lm-bert-base-t2t,trinucleotide_entropy,0.20572065655291175
+gena-lm-bert-base-t2t-multi,Alu,-0.11042466728904053
+gena-lm-bert-base-t2t-multi,L1,-0.5205236411207647
+gena-lm-bert-base-t2t-multi,MIR,0.13986747464103466
+gena-lm-bert-base-t2t-multi,L2,0.09851355443189527
+gena-lm-bert-base-t2t-multi,LTR,0.003373570593078196
+gena-lm-bert-base-t2t-multi,DNA transposon,0.08181295064375271
+gena-lm-bert-base-t2t-multi,simple repeat,0.040250613640670375
+gena-lm-bert-base-t2t-multi,low complexity,0.08933962614336176
+gena-lm-bert-base-t2t-multi,other repeat,-0.020017830057132025
+gena-lm-bert-base-t2t-multi,gc,0.05062752343797557
+gena-lm-bert-base-t2t-multi,cpg_obs_exp,0.05128436983906073
+gena-lm-bert-base-t2t-multi,longest_homopolymer,-0.09866461233671152
+gena-lm-bert-base-t2t-multi,tandem_repeat_score,-0.16951182850760527
+gena-lm-bert-base-t2t-multi,trinucleotide_entropy,0.19726139377208932
+gena-lm-bert-large-t2t,Alu,-0.14020311249582565
+gena-lm-bert-large-t2t,L1,-0.4702640429604083
+gena-lm-bert-large-t2t,MIR,0.18679182535368163
+gena-lm-bert-large-t2t,L2,0.10205109901943951
+gena-lm-bert-large-t2t,LTR,0.016560476171345158
+gena-lm-bert-large-t2t,DNA transposon,0.08193403049377668
+gena-lm-bert-large-t2t,simple repeat,0.04853320049141766
+gena-lm-bert-large-t2t,low complexity,0.0830310170607046
+gena-lm-bert-large-t2t,other repeat,-0.0757657668540531
+gena-lm-bert-large-t2t,gc,0.06096384221543629
+gena-lm-bert-large-t2t,cpg_obs_exp,-0.010054828236985324
+gena-lm-bert-large-t2t,longest_homopolymer,-0.07412301075423447
+gena-lm-bert-large-t2t,tandem_repeat_score,-0.23721963453107875
+gena-lm-bert-large-t2t,trinucleotide_entropy,0.2432911424679435
+gena-lm-bigbird-base-t2t,Alu,-0.072876346723291
+gena-lm-bigbird-base-t2t,L1,-0.33030763925557677
+gena-lm-bigbird-base-t2t,MIR,0.2170334247419361
+gena-lm-bigbird-base-t2t,L2,0.0908260541325166
+gena-lm-bigbird-base-t2t,LTR,-0.027348983367675633
+gena-lm-bigbird-base-t2t,DNA transposon,0.10685178849845618
+gena-lm-bigbird-base-t2t,simple repeat,0.12253385103504921
+gena-lm-bigbird-base-t2t,low complexity,0.11308938530384359
+gena-lm-bigbird-base-t2t,other repeat,-0.17750764748928435
+gena-lm-bigbird-base-t2t,gc,-0.028022101071417786
+gena-lm-bigbird-base-t2t,cpg_obs_exp,-0.05507816366151392
+gena-lm-bigbird-base-t2t,longest_homopolymer,0.04254707527063409
+gena-lm-bigbird-base-t2t,tandem_repeat_score,-0.18442880104366868
+gena-lm-bigbird-base-t2t,trinucleotide_entropy,0.1934860528569119
 hyenadna-large-1m-seqlen-hf,Alu,-0.3642668413388081
 hyenadna-large-1m-seqlen-hf,L1,-0.36290095244659476
 hyenadna-large-1m-seqlen-hf,MIR,0.11839171510795722

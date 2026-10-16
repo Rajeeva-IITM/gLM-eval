@@ -30,6 +30,10 @@ MODELS = {
     "nucleotide-transformer-v2-100m-multi-species": "NT-v2 100M",
     "nucleotide-transformer-v2-250m-multi-species": "NT-v2 250M",
     "nucleotide-transformer-v2-500m-multi-species": "NT-v2 500M",
+    "gena-lm-bert-base-t2t": "GENA BERT-base",
+    "gena-lm-bert-base-t2t-multi": "GENA BERT-base multi",
+    "gena-lm-bert-large-t2t": "GENA BERT-large",
+    "gena-lm-bigbird-base-t2t": "GENA BigBird-base",
     "hyenadna-tiny-1k-seqlen-hf": "Hyena tiny-1k d128",
     "hyenadna-tiny-1k-seqlen-d256-hf": "Hyena tiny-1k d256",
     "hyenadna-tiny-16k-seqlen-d128-hf": "Hyena tiny-16k",
@@ -238,7 +242,7 @@ for ds, root in DATASETS.items():
 # --- Robustness to training-set size (sample_size.py) ------------------------------------------------------------
 ss = pd.read_csv(RESULTS / "sample_size_summary.csv")
 ss = ss[ss.model.isin(MODELS)].assign(model=lambda d: d.model.map(MODELS))
-FAMILY_COLORS = {"GROVER": "tab:blue", "DNABERT-2": "tab:orange", "NT-v2": "tab:green", "Hyena": "tab:red",
+FAMILY_COLORS = {"GROVER": "tab:blue", "DNABERT-2": "tab:orange", "NT-v2": "tab:green", "GENA": "tab:olive", "Hyena": "tab:red",
                  "Caduceus": "tab:purple", "Evo": "tab:brown"}
 
 

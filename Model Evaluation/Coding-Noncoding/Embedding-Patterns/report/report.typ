@@ -51,7 +51,7 @@
 *Scope.* This report describes four experiments, and a training-set size robustness analysis, that probe what frozen embeddings of genomic language models (gLMs)
 encode about protein-coding versus non-coding DNA, and lists their results. Each experiment was run on two kinds of
 data: the 200 bp Genomic Benchmarks coding vs intergenomic windows, and full-length human sequences (complete coding
-sequences against intergenic, lncRNA and intron sequences). Twenty-one models from six families were evaluated.
+sequences against intergenic, lncRNA and intron sequences). Twenty-five models from seven families were evaluated.
 The report gives methods, rationale and results only. Interpretation and discussion are left out.
 
 #outline(depth: 2, indent: auto)
@@ -81,6 +81,10 @@ stretch of DNA embedded in one forward pass; longer sequences are split into chu
     [NT-v2 100M], […-v2-100m-multi-species], [ESM-style, 6-mer], [multi-species], [512], [10,000],
     [NT-v2 250M], […-v2-250m-multi-species], [ESM-style, 6-mer], [multi-species], [768], [10,000],
     [NT-v2 500M], […-v2-500m-multi-species], [ESM-style, 6-mer], [multi-species], [1024], [10,000],
+    [GENA BERT-base], [AIRI-Institute/gena-lm-bert-base-t2t], [BERT (pre-LN), BPE], [human (T2T)], [768], [2,500],
+    [GENA BERT-base multi], [AIRI-Institute/gena-lm-bert-base-t2t-multi], [BERT (pre-LN), BPE], [multi-species], [768], [2,500],
+    [GENA BERT-large], [AIRI-Institute/gena-lm-bert-large-t2t], [BERT (pre-LN), BPE], [human (T2T)], [1024], [2,500],
+    [GENA BigBird-base], [AIRI-Institute/gena-lm-bigbird-base-t2t], [BigBird sparse attention, BPE], [human (T2T)], [768], [10,000],
     [Hyena tiny-1k d128], [LongSafari/hyenadna-tiny-1k-seqlen-hf], [Hyena, single nucleotide], [human], [128], [1,000],
     [Hyena tiny-1k d256], […/hyenadna-tiny-1k-seqlen-d256-hf], [Hyena, single nucleotide], [human], [256], [1,000],
     [Hyena tiny-16k], […/hyenadna-tiny-16k-seqlen-d128-hf], [Hyena, single nucleotide], [human], [128], [10,000],
@@ -115,8 +119,12 @@ Model-specific details, needed for reproduction:
 - *GROVER* and the *HyenaDNA* models load with `AutoModel` (transformers ≥ 5.18).
 - *DNABERT-2* needs transformers 4.44–4.46. Its config is passed explicitly as a `BertConfig`, and its Triton
   flash-attention kernel is disabled so the PyTorch attention path is used.
-- *NT-v2* needs the same older transformers. It loads with `AutoModelForMaskedLM` with `output_hidden_states=True`,
-  and the last hidden state is taken.
+- *NT-v2* and the *GENA-LM BERT* models need the same older transformers. Both ship their model code as a
+  masked-LM class, which NT-v2 maps to `AutoModelForMaskedLM` and GENA-LM BERT to `AutoModel` (loading GENA-LM BERT
+  with `AutoModelForMaskedLM` silently falls back to the standard BERT class, whose post-LayerNorm layout does not
+  match GENA's pre-LayerNorm weights). Both run with `output_hidden_states=True`, and the last hidden state is
+  taken. *GENA-LM BigBird* loads with `AutoModel`
+  (transformers 5); its block-sparse attention was checked to give identical embeddings on repeated runs.
 - *HyenaDNA* and *Caduceus* take no attention mask. Chunks of different lengths are therefore never batched
   together, so no padding enters their hidden states (causal for HyenaDNA, bidirectional for Caduceus). Caduceus
   needs transformers 4.46 with `mamba-ssm` 2.2.5 and `causal-conv1d` 1.5.2 and loads with `AutoModel`.
@@ -132,6 +140,8 @@ chunk is embedded, and the sequence embedding is the mean of the chunk embedding
 The windows were chosen as follows:
 - GROVER and DNABERT-2 are limited to 512 tokens. 1.5 kb stays below that even for poorly compressible sequence;
   2 kb reached about 550 tokens.
+- GENA-LM BERT is also limited to 512 tokens, but its tokens are longer: 2.5 kb needed at most 450 tokens in a
+  sample of 1,200 full-length sequences. GENA-LM BigBird accepts 4,096 tokens and uses the 10 kb window.
 - The HyenaDNA and Caduceus 1k models use their 1 kb training length.
 - Evo 1 (4 kb) and Evo 2 (2 kb) are limited by GPU memory on a shared 24 GB A10, not by context length. Evo 1
   at 8 kb ran out of memory.
@@ -157,8 +167,8 @@ from the model's response to the edit.
 
 == Software
 - Analyses are in `Model Evaluation/Coding-Noncoding/Embedding-Patterns/`.
-- They run under pixi with five environments: `default` (transformers 5; GROVER, HyenaDNA), `legacy`
-  (transformers 4.44–4.46; DNABERT-2, NT-v2), `caduceus`, `evo` and `evo2` (PyPI torch 2.7.1 with prebuilt
+- They run under pixi with five environments: `default` (transformers 5; GROVER, HyenaDNA, GENA-LM
+  BigBird), `legacy` (transformers 4.44–4.46; DNABERT-2, NT-v2, GENA-LM BERT), `caduceus`, `evo` and `evo2` (PyPI torch 2.7.1 with prebuilt
   CUDA kernels).
 - Hardware: NVIDIA A10 GPUs (24 GB).
 

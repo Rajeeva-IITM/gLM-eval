@@ -99,6 +99,46 @@ evo2_7b,low complexity,5,1.0,-5.836442
 evo2_7b,none,621,0.9967793880837359,-5.0023026
 evo2_7b,other repeat,26,1.0,-5.261765
 evo2_7b,simple repeat,23,1.0,-5.516873
+gena-lm-bert-base-t2t,Alu,571,1.0,-25.869205
+gena-lm-bert-base-t2t,DNA transposon,118,1.0,-20.89716
+gena-lm-bert-base-t2t,L1,123,1.0,-24.637363
+gena-lm-bert-base-t2t,L2,84,1.0,-21.758087
+gena-lm-bert-base-t2t,LTR,68,1.0,-21.407465
+gena-lm-bert-base-t2t,MIR,169,1.0,-17.959856
+gena-lm-bert-base-t2t,low complexity,5,1.0,-18.433216
+gena-lm-bert-base-t2t,none,621,0.9887278582930756,-14.39377
+gena-lm-bert-base-t2t,other repeat,26,1.0,-14.329713
+gena-lm-bert-base-t2t,simple repeat,23,1.0,-18.275038
+gena-lm-bert-base-t2t-multi,Alu,571,1.0,-26.314526
+gena-lm-bert-base-t2t-multi,DNA transposon,118,1.0,-20.101871
+gena-lm-bert-base-t2t-multi,L1,123,1.0,-24.5871
+gena-lm-bert-base-t2t-multi,L2,84,1.0,-20.89005
+gena-lm-bert-base-t2t-multi,LTR,68,0.9852941176470589,-21.366203
+gena-lm-bert-base-t2t-multi,MIR,169,1.0,-19.143373
+gena-lm-bert-base-t2t-multi,low complexity,5,1.0,-21.65118
+gena-lm-bert-base-t2t-multi,none,621,0.9790660225442834,-14.926756
+gena-lm-bert-base-t2t-multi,other repeat,26,1.0,-14.518282
+gena-lm-bert-base-t2t-multi,simple repeat,23,1.0,-19.060091
+gena-lm-bert-large-t2t,Alu,571,1.0,-23.485172
+gena-lm-bert-large-t2t,DNA transposon,118,1.0,-18.324926
+gena-lm-bert-large-t2t,L1,123,1.0,-21.493074
+gena-lm-bert-large-t2t,L2,84,1.0,-20.27211
+gena-lm-bert-large-t2t,LTR,68,0.9852941176470589,-17.87853
+gena-lm-bert-large-t2t,MIR,169,1.0,-17.73794
+gena-lm-bert-large-t2t,low complexity,5,1.0,-21.98807
+gena-lm-bert-large-t2t,none,621,0.9919484702093397,-13.874975
+gena-lm-bert-large-t2t,other repeat,26,1.0,-12.042959
+gena-lm-bert-large-t2t,simple repeat,23,1.0,-18.78858
+gena-lm-bigbird-base-t2t,Alu,571,1.0,-23.203156
+gena-lm-bigbird-base-t2t,DNA transposon,118,1.0,-19.201801
+gena-lm-bigbird-base-t2t,L1,123,1.0,-21.21298
+gena-lm-bigbird-base-t2t,L2,84,1.0,-20.515705
+gena-lm-bigbird-base-t2t,LTR,68,1.0,-18.627014
+gena-lm-bigbird-base-t2t,MIR,169,1.0,-18.191113
+gena-lm-bigbird-base-t2t,low complexity,5,1.0,-20.635715
+gena-lm-bigbird-base-t2t,none,621,0.9951690821256038,-14.348902
+gena-lm-bigbird-base-t2t,other repeat,26,1.0,-13.744871
+gena-lm-bigbird-base-t2t,simple repeat,23,1.0,-15.305064
 hyenadna-large-1m-seqlen-hf,Alu,571,1.0,-17.821695
 hyenadna-large-1m-seqlen-hf,DNA transposon,118,0.9915254237288136,-8.63286
 hyenadna-large-1m-seqlen-hf,L1,123,1.0,-11.373065

@@ -1,0 +1,9 @@
+features,dims,test_accuracy,balanced_accuracy
+1-mer frequencies,4,0.75824,0.75824
+2-mer frequencies,16,0.81544,0.8154399999999999
+3-mer frequencies,64,0.8698,0.8698
+4-mer frequencies,256,0.88064,0.88064
+5-mer frequencies,1024,0.89524,0.89524
+6-mer frequencies,4096,0.89604,0.89604
+gena-lm-bert-base-t2t-multi embedding,768,0.92708,0.92708
+gena-lm-bert-base-t2t-multi residual after 1-6-mer regression,768,0.61844,0.61844
